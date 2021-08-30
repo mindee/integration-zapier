@@ -1,0 +1,25 @@
+{
+  "name": "mindee-invoice-parsing",
+  "version": "1.0.2",
+  "description": "Parse your invoices using Mindee's OCR Machine Learning API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive -t 10000"
+  },
+  "engines": {
+    "node": ">=v14",
+    "npm": ">=5.6.0"
+  },
+  "dependencies": {
+    "zapier-platform-cli": "^11.1.0",
+    "zapier-platform-core": "9.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "should": "^13.2.0"
+  },
+  "private": true,
+  "zapier": {
+    "convertedByCLIVersion": "11.1.0"
+  }
+}
