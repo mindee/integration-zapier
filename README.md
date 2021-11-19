@@ -174,11 +174,10 @@ The result is that the user is authenticated against the API. If they wish to us
 Actions are saved in the ‘creates’ directory (triggers are in the triggers directory).  In your app, you’ll see three Mindee_<endpoint>.js files.  If you’re building a different API, you can rename one of these files to whatever you like, and delete the other two.  There are a few lines you’ll need to change:
 
 inputFields - all of the fields (and whether or not they are required) for the API. For Mindee based APIs, the only item is the document (and it is required).
-``
+```
    inputFields: [
      { key: 'document', required: true, type: 'file' }
    ],
-`
 
 ```
 
