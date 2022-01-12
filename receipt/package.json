@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "zapier-platform-cli": "^11.1.0",
-    "zapier-platform-core": "9.5.0"
+    "zapier-platform-core": "9.6.0"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
