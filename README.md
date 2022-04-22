@@ -1,4 +1,5 @@
-# MindeeZapierIntegrations
+# Mindee's Zapier Integrations
+
 At Mindee, we recently launched no-code versions of our ‘off the shelf’ APIs (invoice, receipt and passport OCR extraction) as a part of the Zapier platform. Zapier is a no code platform that allows for easy integration between literally thousands of different applications - with no (or a very little bit) of coding.
 
 Our mantra is to help automate your documentation extraction, so this collaboration just makes sense - any way we can help you easily add our Optical Character Recognition (OCR) and Machine Learning data extraction tools, we’ll do it!
@@ -24,28 +25,24 @@ You’ll need to start off by installing the Zapier CLI. We’ll assume you have
 
 Install the Zapier CLI:
 
-```
+```Shell
 # install the CLI globally
 npm install -g zapier-platform-cli
-
 ```
 
 Next yu’ll need to login to Zapier via the command line (You’ll need a free [Zapier account](https://zapier.com) to accomplish this):
 
-```
+```Shell
 zapier login
-
 ```
 
 ## Creating a CLI integration
 
-From here, we’ll move away from the Zapier CLI tutorial, and go our own route.  We have the code for our three OCR integrations available on [GitHub](https://github.com/dougsillars/MindeeZapierIntegrations). 
+From here, we’ll move away from the Zapier CLI tutorial, and go our own route.  We have the code for our three OCR integrations available on [GitHub](https://github.com/dougsillars/MindeeZapierIntegrations).
 
 Clone this repository to your computer, and open the directory, Inside is the Mindee directory - which contains the Zapier integration. In this tutorial we’ll create an action for a Mindee Document Builder API - one that extracts data from the US tax for W-9. Rename the “Mindee” directory to what you’ll call your Zapier integration. Inside this directory, delete the file ‘.zapierapprc’ (if you do not see this file, you may need to do a Google search on how to see hidden files in your operating system).
 
 The .zapierapprc file has a unique ID for the app you just duplicated.  As we go through the process of creating your Action - the CLi will create a new file (with your new unique ID for your Zapier action).
-
-
 
 ### Authentication
 
@@ -55,7 +52,7 @@ The authentication step is stored in the authentication.js file.  If you are usi
 
 If we were building authentication for a typical service, it might look like this:
 
-```
+```JSON
 test: {
    url: 'https://api.mindee.net/v1/products/mindee/passport/v1/predict',
    method: 'POST',
@@ -66,8 +63,6 @@ test: {
        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=',
    },
    removeMissingValuesFrom: {},
-
-
 ```
 
 ### A trick
@@ -78,7 +73,7 @@ The Mindee APIs do not have an authentication API endpoint.  But Zapier is just 
 
 When your users are setting up their Zap with your action, there is text provided to help them find their API key.  That is in the ‘fields’ section of the authentication.js file:
 
-```
+```JSON
 fields: [
    {
      computed: false,
@@ -93,6 +88,7 @@ fields: [
 ```
 
 If you are building your API based action, you should change this for your endpoint, as the Mindee Passport url will not be terribly helpful for your API.
+
 ### Three Authentication pathways
 
 If you look in the Authentication.js for Mindee - it looks a bit different.  Mindee’s 3 APIs all have unique API keys, so when creating a Zap , we want our users to authenticate against the correct API endpoint.  To account for this, we extended the above “typical” authentication to allow for 3 authentication pathways.
@@ -101,7 +97,7 @@ If you look in the Authentication.js for Mindee - it looks a bit different.  Min
 
 The first field in the Authentication will be a dropdown that lists the three APIs (and holds the API endpoints as the values):
 
-```
+```JSON
 {
      computed: false,
      key: 'api_endpoint',
@@ -131,16 +127,13 @@ The first field in the Authentication will be a dropdown that lists the three AP
      ],
      label: 'The API endpoint you wish to authenticate against',
    }
-
 ```
 
 This results in the following dropdown when the Zap is being created:
 
-
-
 The 2nd field asks for the API key for the endpoint:
 
-```
+```JSON
 {
      computed: false,
      key: 'api_key',
@@ -154,7 +147,7 @@ The 2nd field asks for the API key for the endpoint:
 
 The test entry takes the value from the dropdown (recall that the value holds theit is the API endpoint URL), and the API key, and runs a test:
 
-```
+```JSON
 {
      computed: false,
      key: 'api_key',
@@ -168,21 +161,21 @@ The test entry takes the value from the dropdown (recall that the value holds th
 
 The result is that the user is authenticated against the API. If they wish to use a 2nd API, they can authenticate against Mindee again - and use the 2nd endpoint/API key combination.
 
-
-
 ## Create your Action
-Actions are saved in the ‘creates’ directory (triggers are in the triggers directory).  In your app, you’ll see three Mindee_<endpoint>.js files.  If you’re building a different API, you can rename one of these files to whatever you like, and delete the other two.  There are a few lines you’ll need to change:
+
+Actions are saved in the ‘creates’ directory (triggers are in the triggers directory).  In your app, you’ll see three `Mindee_<endpoint>.js` files.  If you’re building a different API, you can rename one of these files to whatever you like, and delete the other two.  There are a few lines you’ll need to change:
 
 inputFields - all of the fields (and whether or not they are required) for the API. For Mindee based APIs, the only item is the document (and it is required).
-```
+
+```JSON
    inputFields: [
      { key: 'document', required: true, type: 'file' }
    ],
-
 ```
 
 Perform: This lists what the Action will do.  In the case of the Mindee API, it is a POST to the API endpoint URL, with the file in the body (with descriptor ‘document’), and the headers with an API key.
-```
+
+```JSON
 body: {
          'document': bundle.inputData.document
        },
@@ -192,11 +185,11 @@ body: {
        },
 
 ```
+
 Sample:  This section has a sample output from the API.  This is used when building a Zap and there is not input data from a previous step.  You can grab this from the LIve interface on platform.mindee.com - just copy the JSON response into the document.
 After the sample are a few very important sections:
 
-
-```
+```JSON
 key: 'Mindee_passport',
  noun: 'Passport',
  display: {
@@ -206,26 +199,23 @@ key: 'Mindee_passport',
    hidden: false,
    important: true,
  },
-
 ```
 
 Key:  a term that make sense as a key for your application
 Noun: In the Zap building state, this noun is used to describe what is happening, and is added into the standard Zapier text.  You can experiment with different nouns to see how each step reads. It is kind of like doing Mad-Libs, but in a professional setting!
 Display: the label and description on how the Action will appear when it is being created, and in searches in the Zapier platform:
 
-
 ## Register your zap
 
 In the terminal window, browse to the directory with your new action. You can register your Action by naming it:
 
-```
+```Shell
 zapier register "Mindee OCR"
-
 ```
 
 Now you can add this to Zapier by pushing the action to the Zapier server:
 
-```
+```Shell
 zapier push
 ```
 
@@ -235,12 +225,7 @@ Assuming that this step is successful - your action has been uploaded into Zapie
 
 There are a bunch of steps in the Zapier developer website that must be completed in order to publish your Zap.  Head over to [https://developer.zapier.com/](https://developer.zapier.com/), nad select the new integration that you just published.  Click the “edit” button (it’s the gear next to the name). There’s a bunch of things to fill out about your company and how the Integration with Zapier will be used.  You’ll also need to create an account for the Zapier team to test your integration - they’ll create API keys and go and build Zaps.
 
-
-
-
 Once you’ve completed this form, you should be all set to press the publish button. There are a few requirements to pass publication, but the GUI will walk you through them - you must have running Zaps that have been successful. There must be  3 different accounts that have have integrated your ‘invite only’ Zaps.  To invite other people (or your sock puppet accounts), click “Sharing” in the left hand navigation:
-
-
 
 This uRL will invite other accounts to use your Zap actions,a nd if they accept, they can search for your Action while creating a Zap.
 
@@ -248,4 +233,4 @@ This uRL will invite other accounts to use your Zap actions,a nd if they accept,
 
 That’s about it: we created a Zapier Actionusing the Command Line Interface - copying from the Mindee Zapier integration.  This dealt with an interesting authentication concern - where we have 3 different endpoints with different API key requirements - in a way that is easy to follow, and our customers can understand.
 
-WE also created 3 actions that utilize document upload (the reason we are on the CLI in the first place).  WE pushed the code to Zapier,a nd submitted the Actions for publication.  Once the week is up, these Zapier Actions will be available for the general public to add to their n-code document processing 
+WE also created 3 actions that utilize document upload (the reason we are on the CLI in the first place).  WE pushed the code to Zapier,a nd submitted the Actions for publication.  Once the week is up, these Zapier Actions will be available for the general public to add to their n-code document processing
