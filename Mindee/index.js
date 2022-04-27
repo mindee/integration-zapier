@@ -1,4 +1,8 @@
-
+/** Copyright (C) 2021-2022, Mindee.
+ *
+ * This program is licensed under the MIT License.
+ * See LICENSE for full license details.
+ */
 
 const authentication = require('./authentication');
 const mindeeInvoice = require('./creates/mindee_invoice.js');
@@ -15,5 +19,3 @@ module.exports = {
           },
 
 };
-
-
