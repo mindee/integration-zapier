@@ -47,6 +47,7 @@ module.exports = {
         },
       ],
       label: 'The API endpoint you wish to authenticate against',
+      helpText: 'https://developers.mindee.com/docs/make-your-first-request#create-an-api-key'
     },
     {
       computed: false,
