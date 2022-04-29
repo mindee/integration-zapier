@@ -29,21 +29,21 @@ module.exports = {
             'https://api.mindee.net/v1/products/mindee/expense_receipts/v3/predict',
           value:
             'https://api.mindee.net/v1/products/mindee/expense_receipts/v3/predict',
-          label: 'Receipt API',
+          label: 'Receipt API'
         },
         {
           sample:
             'https://api.mindee.net/v1/products/mindee/invoices/v2/predict',
           value:
             'https://api.mindee.net/v1/products/mindee/invoices/v2/predict',
-          label: 'Invoice API',
+          label: 'Invoice API'
         },
         {
           sample:
             'https://api.mindee.net/v1/products/mindee/passport/v1/predict',
           value:
             'https://api.mindee.net/v1/products/mindee/passport/v1/predict',
-          label: 'Passport API',
+          label: 'Passport API'
         },
       ],
       label: 'The API endpoint you wish to authenticate against',
