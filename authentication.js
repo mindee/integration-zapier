@@ -33,9 +33,9 @@ module.exports = {
         },
         {
           sample:
-            'https://api.mindee.net/v1/products/mindee/invoices/v2/predict',
+            'https://api.mindee.net/v1/products/mindee/invoices/v3/predict',
           value:
-            'https://api.mindee.net/v1/products/mindee/invoices/v2/predict',
+            'https://api.mindee.net/v1/products/mindee/invoices/v3/predict',
           label: 'Invoice API'
         },
         {

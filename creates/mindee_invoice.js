@@ -11,7 +11,7 @@ module.exports = {
     ],
     perform: (z, bundle) => {
       const promise = z.request({
-        url: 'https://api.mindee.net/v1/products/mindee/invoices/v2/predict',
+        url: 'https://api.mindee.net/v1/products/mindee/invoices/v3/predict',
         method: 'POST',
         body: {
           'document': bundle.inputData.document
