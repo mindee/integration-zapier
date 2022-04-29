@@ -6,14 +6,17 @@
 
 module.exports = {
   type: 'custom',
-  {
-    computed: false,
-    key: 'api_key',
-    required: true,
-    type: 'string',
-    helpText:
-      'Insert your api key in order to make calls to the Mindee platform. You can find or create your api key: https://platform.mindee.com/',
-  }
+  test: {
+    url: '{{bundle.authData.api_endpoint}}',
+    method: 'POST',
+    params: {},
+    headers: { Authorization: 'Token {{bundle.authData.api_key}}' },
+    body: {
+      document:
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=',
+    },
+    removeMissingValuesFrom: {},
+  },
   fields: [
 
     {
