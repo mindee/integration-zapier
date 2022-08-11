@@ -27,10 +27,9 @@ describe('Create - Mindee_invoice', () => {
       inputData: {},
     };
 
-    const result = await appTester(
-      App.creates['Mindee_invoice'].operation.perform,
-      bundle
-    );
-    result.should.not.be.an.Array();
+    appTester(App.creates['Mindee_invoice'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
   });
 });
