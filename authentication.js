@@ -45,6 +45,13 @@ module.exports = {
             'https://api.mindee.net/v1/products/mindee/passport/v1/predict',
           label: 'Passport API'
         },
+        {
+          sample:
+            'https://api.mindee.net/v1/products/mindee/idcard_fr/v1/predict',
+          value:
+            'https://api.mindee.net/v1/products/mindee/idcard_fr/v1/predict',
+          label: 'French ID (Carte Nationale d\'Identité) API'
+        }
       ],
       label: 'The API endpoint you wish to authenticate against',
       helpText: 'https://developers.mindee.com/docs/make-your-first-request#create-an-api-key'
