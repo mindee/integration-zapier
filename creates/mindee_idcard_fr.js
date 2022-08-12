@@ -547,7 +547,6 @@ module.exports = {
     label: 'Mindee French ID Parsing',
     description:
       'Extract data from an French ID Card using the Mindee Carte Nationale d\'Identité Parsing API',
-    hidden: false,
-    important: true,
+    hidden: false
   },
 };
