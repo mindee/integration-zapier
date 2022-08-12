@@ -1,5 +1,19 @@
 # Mindee's Zapier Integration Changelog
 
+## v1.2.0
+
+### New
+
+- add the French ID Card API (Carte Nationale d'Identité)
+- add missing tests for creation of Receipt & Passport
+
+### Changes
+
+- move from should.js (project has been abandoned) to chai for the BDD / TDD assertion library
+- upgrade Node.js version the integration is running on Zapier servers
+- upgrade Zapier & Mocha dependencies
+- update the help message to point to the new create your API key documentation
+
 ## v1.1.0
 
 ### Changes
