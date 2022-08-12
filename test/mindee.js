@@ -23,12 +23,10 @@ const bundle = {
 
   inputData: {},
 };
+zapier.tools.env.inject();
 
 describe('Create - Mindee_invoice', () => {
-  zapier.tools.env.inject();
-
   it('should create an object', async () => {
-
     appTester(App.creates['Mindee_invoice'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
@@ -36,11 +34,27 @@ describe('Create - Mindee_invoice', () => {
   });
 });
 
-describe('Create - Mindee_idcard_fr', () => {
-  zapier.tools.env.inject();
-
+describe('Create - Mindee_expense_receipt', () => {
   it('should create an object', async () => {
+    appTester(App.creates['Mindee_expense_receipt'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
 
+describe('Create - Mindee_passport', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_passport'].operation.perform, bundle)
+    appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+
+describe('Create - Mindee_idcard_fr', () => {
+  it('should create an object', async () => {
     appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
