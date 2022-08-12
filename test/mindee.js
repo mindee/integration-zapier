@@ -4,7 +4,8 @@
  * See LICENSE for full license details.
  */
 
-require('should');
+const chai = require('chai');
+const should = chai.should;
 
 const zapier = require('zapier-platform-core');
 
@@ -53,6 +54,7 @@ describe('Create - Mindee_passport', () => {
   it('should create an object', async () => {
 
     appTester(App.creates['Mindee_passport'].operation.perform, bundle)
+    appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
