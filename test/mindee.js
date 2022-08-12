@@ -4,7 +4,8 @@
  * See LICENSE for full license details.
  */
 
-require('should');
+const chai = require('chai');
+const should = chai.should;
 
 const zapier = require('zapier-platform-core');
 
