@@ -26,16 +26,16 @@ module.exports = {
       choices: [
         {
           sample:
-            'https://api.mindee.net/v1/products/mindee/expense_receipts/v3/predict',
+            'https://api.mindee.net/v1/products/mindee/expense_receipts/v4/predict',
           value:
-            'https://api.mindee.net/v1/products/mindee/expense_receipts/v3/predict',
+            'https://api.mindee.net/v1/products/mindee/expense_receipts/v4/predict',
           label: 'Receipt API'
         },
         {
           sample:
-            'https://api.mindee.net/v1/products/mindee/invoices/v3/predict',
+            'https://api.mindee.net/v1/products/mindee/invoices/v4/predict',
           value:
-            'https://api.mindee.net/v1/products/mindee/invoices/v3/predict',
+            'https://api.mindee.net/v1/products/mindee/invoices/v4/predict',
           label: 'Invoice API'
         },
         {

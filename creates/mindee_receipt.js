@@ -11,7 +11,7 @@ module.exports = {
     ],
     perform: (z, bundle) => {
       const promise = z.request({
-        url: 'https://api.mindee.net/v1/products/mindee/expense_receipts/v3/predict',
+        url: 'https://api.mindee.net/v1/products/mindee/expense_receipts/v4/predict',
         method: 'POST',
         body: {
           'document': bundle.inputData.document
@@ -25,91 +25,212 @@ module.exports = {
       return promise.then((response) => JSON.parse(response.content));
     },
     sample:{
+      "extras": {},
+      "finished_at": "2023-01-03T16:45:06.077168",
+      "is_rotation_applied": true,
+      "pages": [
+        {
+          "extras": {},
+          "id": 0,
+          "orientation": {"value": 0},
+          "prediction": {
+            "category": {
+              "confidence": 0.67,
+              "value": "miscellaneous"
+            },
+            "date": {
+              "confidence": 0.99,
+              "polygon": [
+                [0.84, 0.305],
+                [0.933, 0.305],
+                [0.933, 0.317],
+                [0.84, 0.317]
+              ],
+              "value": "2018-09-25"
+            },
+            "document_type": {
+              "confidence": 0.98,
+              "value": "EXPENSE RECEIPT"
+            },
+            "locale": {
+              "confidence": 0.93,
+              "country": "CA",
+              "currency": "CAD",
+              "language": "en",
+              "value": "en-CA"
+            },
+            "orientation": {
+              "confidence": 0.99,
+              "degrees": 0
+            },
+            "subcategory": {
+              "confidence": null,
+              "value": null
+            },
+            "supplier": {
+              "confidence": 0,
+              "polygon": [],
+              "value": null
+            },
+            "taxes": [
+              {
+                "base": null,
+                "code": "TAX",
+                "confidence": 0.99,
+                "polygon": [
+                  [0.754, 0.744],
+                  [0.965, 0.744],
+                  [0.965, 0.758],
+                  [0.754, 0.758]
+                ],
+                "rate": 8,
+                "value": 193.2
+              }
+            ],
+            "time": {
+              "confidence": 0,
+              "polygon": [],
+              "value": null
+            },
+            "tip": {
+              "confidence": 0,
+              "polygon": [],
+              "value": null
+            },
+            "total_amount": {
+              "confidence": 0.99,
+              "polygon": [
+                [0.887, 0.84],
+                [0.965, 0.84],
+                [0.965, 0.855],
+                [0.887, 0.855]
+              ],
+              "value": 2608.2
+            },
+            "total_net": {
+              "confidence": 0,
+              "polygon": [],
+              "value": null
+            },
+            "total_tax": {
+              "confidence": 0.99,
+              "polygon": [],
+              "value": 193.2
+            }
+          }
+        }
+      ],
       "prediction": {
         "category": {
-          "confidence": 1,
-          "value": "food"
+          "confidence": 0.67,
+          "value": "miscellaneous"
         },
         "date": {
           "confidence": 0.99,
+          "page_id": 0,
           "polygon": [
-            [0.539, 0.269],
-            [0.693, 0.269],
-            [0.693, 0.296],
-            [0.539, 0.296]
+            [0.84, 0.305],
+            [0.933, 0.305],
+            [0.933, 0.317],
+            [0.84, 0.317]
           ],
-          "raw": "26-01-2017",
-          "value": "2017-01-26"
+          "value": "2018-09-25"
+        },
+        "document_type": {
+          "confidence": 0.98,
+          "value": "EXPENSE RECEIPT"
         },
         "locale": {
-          "confidence": 0.69,
+          "confidence": 0.93,
           "country": "CA",
           "currency": "CAD",
-          "language": "fr",
-          "value": "fr-CA"
+          "language": "en",
+          "value": "en-CA"
         },
-        "orientation": {
-          "confidence": 0.99,
-          "degrees": 0
+        "subcategory": {
+          "confidence": 0,
+          "value": null
         },
         "supplier": {
-          "confidence": 0.61,
-          "polygon": [
-            [0.267, 0.062],
-            [0.572, 0.062],
-            [0.572, 0.102],
-            [0.267, 0.102]
-          ],
-          "value": "REUBENS DELI"
+          "confidence": 0,
+          "page_id": null,
+          "polygon": [],
+          "value": null
         },
         "taxes": [
           {
-            "code": "QST",
-            "confidence": 0.78,
+            "base": null,
+            "code": "TAX",
+            "confidence": 0.99,
+            "page_id": 0,
             "polygon": [
-              [0.439, 0.606],
-              [0.703, 0.606],
-              [0.703, 0.633],
-              [0.439, 0.633]
+              [0.754, 0.744],
+              [0.965, 0.744],
+              [0.965, 0.758],
+              [0.754, 0.758]
             ],
-            "rate": null,
-            "value": 1.8
-          },
-          {
-            "code": "GST",
-            "confidence": 0.31,
-            "polygon": [
-              [0.439, 0.578],
-              [0.703, 0.578],
-              [0.703, 0.604],
-              [0.439, 0.604]
-            ],
-            "rate": null,
-            "value": 0.9
+            "rate": 8,
+            "value": 193.2
           }
         ],
         "time": {
-          "confidence": 0.99,
-          "polygon": [
-            [0.469, 0.887],
-            [0.594, 0.887],
-            [0.594, 0.912],
-            [0.469, 0.912]
-          ],
-          "raw": "12:29",
-          "value": "12:29"
+          "confidence": 0,
+          "page_id": null,
+          "polygon": [],
+          "value": null
         },
-        "total_incl": {
+        "tip": {
+          "confidence": 0,
+          "page_id": null,
+          "polygon": [],
+          "value": null
+        },
+        "total_amount": {
           "confidence": 0.99,
+          "page_id": 0,
           "polygon": [
-            [0.625, 0.666],
-            [0.708, 0.666],
-            [0.708, 0.706],
-            [0.625, 0.706]
+            [0.887, 0.84],
+            [0.965, 0.84],
+            [0.965, 0.855],
+            [0.887, 0.855]
           ],
-          "value": 20.69
+          "value": 2608.2
+        },
+        "total_net": {
+          "confidence": 0,
+          "page_id": null,
+          "polygon": [],
+          "value": null
+        },
+        "total_tax": {
+          "confidence": 0.99,
+          "page_id": 0,
+          "polygon": [],
+          "value": 193.2
         }
-      }
+      },
+      "processing_time": 0.843,
+      "product": {
+        "features": [
+          "locale",
+          "category",
+          "subcategory",
+          "document_type",
+          "date",
+          "time",
+          "total_amount",
+          "total_net",
+          "total_tax",
+          "tip",
+          "taxes",
+          "supplier",
+          "orientation"
+        ],
+        "name": "mindee/expense_receipts",
+        "type": "standard",
+        "version": "4.1"
+      },
+      "started_at": "2023-01-03T16:45:05.234016"
     }
   },
   key: 'Mindee_expense_receipt',
