@@ -24,7 +24,7 @@ module.exports = {
       required: true,
       type: 'string',
       helpText:
-        'Name that will be displayed as the name of this connection, in case you want to use several mindee users/organizations',
+        'Name that will be displayed as the name of this connection, in case you want to use several Mindee users/organizations',
     },
     {
       computed: false,
