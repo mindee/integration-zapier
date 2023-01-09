@@ -18,7 +18,8 @@ module.exports = {
         },
         headers: {
           'Authorization':  'Token {{bundle.authData.api_key}}',
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'User-Agent': 'mindee-api-zapier'
         },
       });
 
