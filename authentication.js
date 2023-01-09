@@ -7,7 +7,7 @@
 module.exports = {
   type: 'custom',
   test: {
-    url: 'https://api.mindee.net/v1/products/mindee/invoices/v4/predict?cr',
+    url: 'https://api.mindee.net/v1/products/mindee/invoices/v4/predict',
     method: 'POST',
     params: {},
     headers: { Authorization: 'Token {{bundle.authData.api_key}}' },
