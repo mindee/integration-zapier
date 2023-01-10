@@ -17,7 +17,7 @@ module.exports = {
         key: 'api_url',
         required: true,
         label: 'Your API URL',
-        helpText: 'Go on the page of the concerned API, on platform.mindee.com and paste here the URL of the page.',
+        helpText: 'Go on the page of the concerned API, on platform.mindee.com and paste here the URL of the page',
         type:'string',
         placeholder: 'Example: https://platform.mindee.com/products/account_name/api_name'
       },
