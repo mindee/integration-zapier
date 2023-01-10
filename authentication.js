@@ -7,54 +7,24 @@
 module.exports = {
   type: 'custom',
   test: {
-    url: '{{bundle.authData.api_endpoint}}',
+    url: 'https://api.mindee.net/v1/products/mindee/invoices/v4/predict',
     method: 'POST',
     params: {},
     headers: { Authorization: 'Token {{bundle.authData.api_key}}' },
     body: {
       document:
-        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=',
+      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=',
     },
     removeMissingValuesFrom: {},
   },
   fields: [
-
     {
       computed: false,
-      key: 'api_endpoint',
+      key: 'connection_name',
       required: true,
-      choices: [
-        {
-          sample:
-            'https://api.mindee.net/v1/products/mindee/expense_receipts/v3/predict',
-          value:
-            'https://api.mindee.net/v1/products/mindee/expense_receipts/v3/predict',
-          label: 'Receipt API'
-        },
-        {
-          sample:
-            'https://api.mindee.net/v1/products/mindee/invoices/v3/predict',
-          value:
-            'https://api.mindee.net/v1/products/mindee/invoices/v3/predict',
-          label: 'Invoice API'
-        },
-        {
-          sample:
-            'https://api.mindee.net/v1/products/mindee/passport/v1/predict',
-          value:
-            'https://api.mindee.net/v1/products/mindee/passport/v1/predict',
-          label: 'Passport API'
-        },
-        {
-          sample:
-            'https://api.mindee.net/v1/products/mindee/idcard_fr/v1/predict',
-          value:
-            'https://api.mindee.net/v1/products/mindee/idcard_fr/v1/predict',
-          label: 'French ID (Carte Nationale d\'Identité) API'
-        }
-      ],
-      label: 'The API endpoint you wish to authenticate against',
-      helpText: 'https://developers.mindee.com/docs/create-api-key#creating-your-api-key'
+      type: 'string',
+      helpText:
+        'Name that will be displayed as the name of this connection, in case you want to use several Mindee users/organizations',
     },
     {
       computed: false,
@@ -62,9 +32,10 @@ module.exports = {
       required: true,
       type: 'string',
       helpText:
-        'Insert your api key in order to make calls to the Mindee platform. You can find or create your api key: https://platform.mindee.com/',
+        'Insert your API key in order to make calls to the Mindee platform. You can create your API key as mentioned here: https://developers.mindee.com/docs/create-api-key#creating-your-api-key',
     },
+    
   ],
-  connectionLabel: '{{bundle.authData.api_endpoint}}',
+  connectionLabel: '{{bundle.authData.connection_name}}',
   customConfig: {},
 };
