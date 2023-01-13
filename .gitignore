@@ -86,7 +86,6 @@ typings/
 
 # Generated output
 dist/
-docs/
 build/
 
 # Gatsby files
