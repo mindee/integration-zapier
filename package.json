@@ -4,7 +4,8 @@
   "description": "Parse your receipt using Mindee's OCR Machine Learning API.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive -t 10000"
+    "test": "mocha --recursive -t 10000",
+    "zapier-test": "zapier test"
   },
   "engines": {
     "node": "~14.21",
