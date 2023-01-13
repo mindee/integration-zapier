@@ -4,12 +4,6 @@
  * See LICENSE for full license details.
  */
 
-/*const url_base = 'https://platform.mindee.com/products/xavier/accomodation_receipts_extra_fields'
-let username = url_base.split("/")[4]
-let api_name = url_base.split("/")[5]
-api_name = api_name.split("#")[0]
-const api_version = '1'*/
-
 module.exports = {
   operation: { 
     inputFields: [
@@ -39,10 +33,10 @@ module.exports = {
       },
     ],
     perform: (z, bundle) => {
-      let apiVersion = bundle.inputData.api_version ? bundle.inputData.api_version : 1;
-      let apiName = bundle.inputData.api_url.split("products/")[1].split("#")[0];
+      const apiVersion = bundle.inputData.api_version ? bundle.inputData.api_version : 1;
+      const completeApiName = bundle.inputData.api_url.split("products/")[1].split("#")[0];
       const promise = z.request({
-        url: `https://api.mindee.net/v1/products/${apiName}/v${apiVersion}/predict`,
+        url: `https://api.mindee.net/v1/products/${completeApiName}/v${apiVersion}/predict`,
         method: 'POST',
         body: {
           'document': bundle.inputData.document

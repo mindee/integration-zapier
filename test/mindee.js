@@ -46,7 +46,6 @@ describe('Create - Mindee_expense_receipt', () => {
 describe('Create - Mindee_passport', () => {
   it('should create an object', async () => {
     appTester(App.creates['Mindee_passport'].operation.perform, bundle)
-    appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -56,6 +55,15 @@ describe('Create - Mindee_passport', () => {
 describe('Create - Mindee_idcard_fr', () => {
   it('should create an object', async () => {
     appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+
+describe('Create - Mindee_custom_api', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_custom_api'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
