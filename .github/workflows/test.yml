@@ -24,4 +24,4 @@ jobs:
           npm ci
 
       - name: Test code
-        run: npm run test
+        run: npm run zapier-test
