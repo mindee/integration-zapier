@@ -30,7 +30,7 @@ module.exports = {
       computed: false,
       key: 'api_key',
       required: true,
-      type: 'string',
+      type: 'password',
       helpText:
         'Insert your API key in order to make calls to the Mindee platform. You can create your API key as mentioned here: https://developers.mindee.com/docs/create-api-key#creating-your-api-key',
     },
