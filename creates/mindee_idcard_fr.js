@@ -7,7 +7,14 @@
 module.exports = {
   operation: {
     inputFields: [
-      { key: 'document', required: true, type: 'file' }
+      {
+        key: 'document',
+        required: true,
+        label: 'Your document',
+        helpText: 'Select here the file you want to analyze',
+        type:'file',
+        placeholder: 'Select your file...'
+      }
     ],
     perform: (z, bundle) => {
       const promise = z.request({
