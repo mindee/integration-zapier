@@ -51,15 +51,43 @@ module.exports = {
       return promise.then((response) => JSON.parse(response.content));
     },
     sample: {
-      "surname": {
-        "confidence": 0.99,
-        "polygon": [
-          [0.34, 0.581],
-          [0.473, 0.581],
-          [0.473, 0.604],
-          [0.34, 0.604]
+      "api_request": {
+        "error": {},
+        "resources": [
+          "document"
         ],
-        "value": "PUDARSAN"
+        "status": "success",
+        "status_code": 201,
+        "url": "http://api.mindee.net/v1/products/test/field_test/v1/predict"
+      },
+      "document": {
+        "id": "37067c22-4cea-40d3-9809-b9ca1bfedd33",
+        "inference": {
+          "extras": {},
+          "finished_at": "2022-05-19T08:57:40+00:00",
+          "is_rotation_applied": true,
+          "pages": [
+            {
+              "extras": {},
+              "id": 0,
+              "orientation": {
+                "value": null
+              },
+              "prediction": {}
+            }
+          ],
+          "prediction": {},
+          "processing_time": 0.593,
+          "product": {
+            "features": [],
+            "name": "test/field_test",
+            "type": "constructed",
+            "version": "1.1"
+          },
+          "started_at": "2022-05-19T08:57:40+00:00"
+        },
+        "n_pages": 1,
+        "name": "hello.pdf"
       }
     },
   },
