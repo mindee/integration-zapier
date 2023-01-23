@@ -50,6 +50,18 @@ module.exports = {
 
       return promise.then((response) => JSON.parse(response.content));
     },
+    sample: {
+      "surname": {
+        "confidence": 0.99,
+        "polygon": [
+          [0.34, 0.581],
+          [0.473, 0.581],
+          [0.473, 0.604],
+          [0.34, 0.604]
+        ],
+        "value": "PUDARSAN"
+      }
+    },
   },
   key: 'Mindee_custom_api',
   noun: 'API Builder parsing',
