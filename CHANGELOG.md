@@ -1,5 +1,18 @@
 # Mindee's Zapier Integration Changelog
 
+## v2.0.0
+
+### New
+
+- add the Custom APIs (from API Builder)
+- update to Invoice v4 (new fields including line items, better performances)
+- update to Receipt v4 (new fields including line items, better performances)
+
+### Changes
+
+- new authentication and connection based on a single api key for all APIs
+- slight changes in the UX
+
 ## v1.2.0
 
 ### New
