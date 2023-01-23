@@ -5,7 +5,7 @@
 ### New
 
 - add the Custom APIs (from API Builder)
-- update to Invoice v3 (new fields including line items, better performances)
+- update to Invoice v4 (new fields including line items, better performances)
 - update to Receipt v4 (new fields including line items, better performances)
 
 ### Changes
