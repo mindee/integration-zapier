@@ -1,5 +1,11 @@
 # Mindee's Zapier Integration Changelog
 
+## v2.0.1
+
+### Changes 
+
+- fixes in the URL structure to support new API Builder versions
+
 ## v2.0.0
 
 ### New

@@ -13,7 +13,7 @@ module.exports = {
         label: 'Your API URL',
         helpText: 'Go on the page of the concerned API, on platform.mindee.com and paste here the URL of the page',
         type:'string',
-        placeholder: 'Example: https://platform.mindee.com/products/account_name/api_name'
+        placeholder: 'Example: https://platform.mindee.com/account_name/api_name'
       },
       {
         key: 'api_version',
@@ -34,9 +34,11 @@ module.exports = {
     ],
     perform: (z, bundle) => {
       const apiVersion = bundle.inputData.api_version ? bundle.inputData.api_version : 1;
-      const completeApiName = bundle.inputData.api_url.split("products/")[1].split("#")[0];
+      const splitUrl = bundle.inputData.api_url.replace("https://platform.mindee.com/","").split('/');
+      const apiOwner = splitUrl[0];
+      const apiName = splitUrl[1];
       const promise = z.request({
-        url: `https://api.mindee.net/v1/products/${completeApiName}/v${apiVersion}/predict`,
+        url: `https://api.mindee.net/v1/products/${apiOwner}/${apiName}/v${apiVersion}/predict`,
         method: 'POST',
         body: {
           'document': bundle.inputData.document
