@@ -61,6 +61,15 @@ describe('Create - Mindee_idcard_fr', () => {
   });
 });
 
+describe('Create - Mindee_financial_document', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_financial_document'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+
 describe('Create - Mindee_custom_api', () => {
   it('should create an object', async () => {
     appTester(App.creates['Mindee_custom_api'].operation.perform, bundle)
