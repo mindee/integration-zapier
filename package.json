@@ -12,7 +12,7 @@
     "npm": "~6.14"
   },
   "dependencies": {
-    "zapier-platform-cli": "12.2.0",
+    "zapier-platform-cli": "13.0.0",
     "zapier-platform-core": "12.2.0"
   },
   "devDependencies": {
