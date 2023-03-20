@@ -34,7 +34,11 @@ module.exports = {
     ],
     perform: (z, bundle) => {
       const apiVersion = bundle.inputData.api_version ? bundle.inputData.api_version : 1;
-      const splitUrl = bundle.inputData.api_url.replace("https://platform.mindee.com/","").split('/');
+      const splitUrl = bundle.inputData.api_url
+            .toLowerCase()
+            .replace("https://platform.mindee.com/","")
+            .replace("https://api.mindee.net/v1/products/","")
+            .split('/');
       const apiOwner = splitUrl[0];
       const apiName = splitUrl[1];
       const promise = z.request({
