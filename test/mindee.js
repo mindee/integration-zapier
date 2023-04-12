@@ -5,6 +5,7 @@
  */
 
 const chai = require('chai');
+const should = chai.should;
 
 const zapier = require('zapier-platform-core');
 
@@ -54,6 +55,15 @@ describe('Create - Mindee_passport', () => {
 describe('Create - Mindee_idcard_fr', () => {
   it('should create an object', async () => {
     appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+
+describe('Create - Mindee_financial_document', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_financial_document'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
