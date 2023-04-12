@@ -10,7 +10,6 @@ const mindeePassport = require('./creates/mindee_passport.js');
 const mindeeReceipt = require('./creates/mindee_receipt.js');
 const mindeeFrenchId = require('./creates/mindee_idcard_fr.js');
 const mindeeCustomAPI = require('./creates/mindee_custom.js');
-const mindeeFinancialDocumentAPI = require('./creates/mindee_financial_document.js');
 
 module.exports = {
   version: require('./package.json').version,
@@ -22,6 +21,5 @@ module.exports = {
     [mindeePassport.key]: mindeePassport,
     [mindeeFrenchId.key]: mindeeFrenchId,
     [mindeeCustomAPI.key]: mindeeCustomAPI,
-    [mindeeFinancialDocumentAPI.key]: mindeeFinancialDocumentAPI,
   }
 };
