@@ -4,17 +4,12 @@
  * See LICENSE for full license details.
  */
 
+const defaults = require("./defaults");
+
 module.exports = {
   operation: { 
     inputFields: [
-      {
-        key: 'document',
-        required: true,
-        label: 'Your document',
-        helpText: 'Select here the file you want to analyze',
-        type:'file',
-        placeholder: 'Select your file...'
-      }
+      defaults.documentInputField,
     ],
     perform: (z, bundle) => {
       const promise = z.request({
@@ -23,11 +18,7 @@ module.exports = {
         body: {
           'document': bundle.inputData.document
         },
-        headers: {
-          'Authorization':  'Token {{bundle.authData.api_key}}',
-          'content-type': 'application/json',
-          'User-Agent': 'mindee-api-zapier'
-        },
+        headers: defaults.postHeaders,
       });
 
       return promise.then((response) => JSON.parse(response.content));
