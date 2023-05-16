@@ -5,7 +5,7 @@ module.exports = {
         label: 'Your document',
         helpText: 'Specify the file you want to analyze (the doc itself, or a public HTTPS URL)',
         type: 'file',
-        placeholder: 'Specify the file or the public HTTPS URL here...'
+        placeholder: 'Specify the file or the public HTTPS URL here (TEST)...'
     },
     postHeaders: {
         'Authorization': 'Token {{bundle.authData.api_key}}',
