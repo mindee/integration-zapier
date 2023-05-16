@@ -1,6 +1,6 @@
 {
   "name": "mindee-receipt-parsing",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Parse your receipt using Mindee's OCR Machine Learning API.",
   "main": "index.js",
   "scripts": {
