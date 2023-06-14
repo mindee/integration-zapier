@@ -1,5 +1,9 @@
 # Mindee's Zapier Integration Changelog
 
+## v2.2.0
+### Changes
+- change authentication method
+
 ## v2.1.0
 ### New
 - [Financial Docs OCR](https://developers.mindee.com/docs/financial-documents-ocr) v1
