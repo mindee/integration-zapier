@@ -7,14 +7,11 @@
 module.exports = {
   type: 'custom',
   test: {
-    url: 'https://api.mindee.net/v1/products/mindee/invoices/v4/predict',
-    method: 'POST',
+    url: 'https://api.mindee.net/v1/customers/self/products',
+    method: 'GET',
     params: {},
     headers: { Authorization: 'Token {{bundle.authData.api_key}}' },
-    body: {
-      document:
-      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=',
-    },
+    body: {},
     removeMissingValuesFrom: {},
   },
   fields: [
