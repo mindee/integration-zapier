@@ -2,7 +2,7 @@
 
 ## v2.2.0
 ### Changes
-- change authentication method
+* Improve authentication method: a subscription to Invoice is no longer needed.
 
 ## v2.1.0
 ### New
