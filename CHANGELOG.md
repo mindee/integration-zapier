@@ -1,6 +1,5 @@
 # Mindee's Zapier Integration Changelog
 
-
 ## v2.2.1
 ### Changes
 - fix the URL structure for Custom API
