@@ -1,5 +1,10 @@
 # Mindee's Zapier Integration Changelog
 
+
+## v2.2.1
+### Changes
+- fix the URL structure for Custom API
+
 ## v2.2.0
 ### Changes
 * Improve authentication method: a subscription to Invoice is no longer needed.
