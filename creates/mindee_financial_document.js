@@ -337,7 +337,6 @@ module.exports = {
     label: 'Mindee Financial Document Parsing',
     description:
       'Extract data from a financial document (Invoice OR Receipt) using the Mindee Financial Document Parsing API',
-    hidden: false,
-    important: false,
+    hidden: false
   },
 };

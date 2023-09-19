@@ -432,8 +432,7 @@ module.exports = {
   display: {
     label: 'Mindee Invoice Parsing',
     description:
-      'Extract data from an Invoice using the Mindee Invoice Parsing API',
+      'Extract data from any Invoice using the Mindee Invoice Parsing API',
     hidden: false,
-    important: true,
   },
 };

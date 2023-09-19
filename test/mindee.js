@@ -78,3 +78,31 @@ describe('Create - Mindee_custom_api', () => {
       })
   });
 });
+
+describe('Create - Mindee_fr_bank_account_details', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_fr_bank_account_details'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+
+describe('Create - Mindee_us_bank_check', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_us_bank_check'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+
+describe('Create - Mindee_us_driving_license', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_us_driving_license'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+

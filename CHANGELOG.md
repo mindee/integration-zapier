@@ -1,5 +1,12 @@
 # Mindee's Zapier Integration Changelog
 
+## v2.3.0
+### New
+- update to Receipts v5
+- update to French National Identity Card v2 (Manages new format)
+- add French Bank Account Details API (R.I.B.) 
+- add US Bank Check API 
+- add US Driving License API
 
 ## v2.2.1
 ### Changes

@@ -152,7 +152,6 @@ module.exports = {
     label: 'Mindee International Passport Parsing',
     description:
       'Instantly extract data from any passport using the Mindee Passport Extraction API',
-    hidden: false,
-    important: false
+    hidden: false
   },
 };
