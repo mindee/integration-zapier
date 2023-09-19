@@ -93,7 +93,6 @@ module.exports = {
     label: 'Mindee API Builder Parsing',
     description:
       'Extract data from any custom document using the Mindee API Builder made API',
-    hidden: false,
-    important: true,
+    hidden: false
   },
 };

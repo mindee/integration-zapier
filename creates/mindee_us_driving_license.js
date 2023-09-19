@@ -904,7 +904,6 @@ module.exports = {
     label: 'Mindee US Driving License Parsing',
     description:
       'Extract data from any US Driving License using the Mindee US Driving License API',
-    hidden: false,
-    important: false
+    hidden: false
   },
 };

@@ -519,7 +519,6 @@ module.exports = {
     label: 'Mindee US Bank Check Parsing',
     description:
       'Extract data from any Mindee US Bank Check using the Mindee US Bank Check API',
-    hidden: false,
-    important: false
+    hidden: false
   },
 };

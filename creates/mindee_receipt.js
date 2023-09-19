@@ -699,7 +699,6 @@ module.exports = {
     label: 'Mindee Expense Receipt Parsing',
     description:
       'Extract data from any receipt using the Mindee Receipt Parsing API',
-    hidden: false,
-    important: true,
+    hidden: false
   },
 };

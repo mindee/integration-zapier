@@ -262,7 +262,6 @@ module.exports = {
     label: 'Mindee French Bank Account Details (R.I.B.) Parsing',
     description:
       'Extract data from any French Bank Account Details (R.I.B.) using the Mindee French Bank Account Details API',
-    hidden: false,
-    important: false
+    hidden: false
   },
 };

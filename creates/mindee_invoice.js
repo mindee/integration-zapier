@@ -434,6 +434,5 @@ module.exports = {
     description:
       'Extract data from any Invoice using the Mindee Invoice Parsing API',
     hidden: false,
-    important: true,
   },
 };
