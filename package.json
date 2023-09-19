@@ -12,8 +12,8 @@
     "npm": "~8.14"
   },
   "dependencies": {
-    "zapier-platform-cli": "13.0.0",
-    "zapier-platform-core": "13.0.0"
+    "zapier-platform-cli": "15.1.0",
+    "zapier-platform-core": "15.1.0"
   },
   "devDependencies": {
     "mocha": "~10.2.0",
