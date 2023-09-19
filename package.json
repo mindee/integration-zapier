@@ -1,6 +1,6 @@
 {
   "name": "mindee-receipt-parsing",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Parse your receipt using Mindee's OCR Machine Learning API.",
   "main": "index.js",
   "scripts": {
@@ -12,12 +12,13 @@
     "npm": "~8.14"
   },
   "dependencies": {
-    "zapier-platform-cli": "13.0.0",
-    "zapier-platform-core": "13.0.0"
+    "npm": "^10.1.0",
+    "zapier-platform-cli": "^15.1.0",
+    "zapier-platform-core": "15.1.0"
   },
   "devDependencies": {
-    "mocha": "~10.2.0",
-    "chai": "~4.3.7"
+    "chai": "~4.3.7",
+    "mocha": "~10.2.0"
   },
   "private": true,
   "zapier": {
