@@ -4,20 +4,26 @@
  * See LICENSE for full license details.
  */
 
-const authentication = require('./authentication');
-const mindeeInvoice = require('./creates/mindee_invoice.js');
-const mindeePassport = require('./creates/mindee_passport.js');
-const mindeeReceipt = require('./creates/mindee_receipt.js');
-const mindeeFrenchId = require('./creates/mindee_idcard_fr.js');
-const mindeeCustomAPI = require('./creates/mindee_custom.js');
-const mindeeFinancialDocumentAPI = require('./creates/mindee_financial_document.js');
-const mindeeFrenchBankAccountDetails = require('./creates/mindee_fr_bank_account_details.js');
-const mindeeUSBankCheck = require('./creates/mindee_us_bank_check.js');
-const mindeeUSDrivingLicense = require('./creates/mindee_us_driving_license.js');
+import authentication from "./authentication.js";
 
-module.exports = {
-  version: require('./package.json').version,
-  platformVersion: require('zapier-platform-core').version,
+import mindeeInvoice from './creates/mindee_invoice.js';
+import mindeePassport from './creates/mindee_passport.js';
+import mindeeReceipt from './creates/mindee_receipt.js';
+import mindeeFrenchId from './creates/mindee_idcard_fr.js';
+import mindeeCustomAPI from './creates/mindee_custom.js';
+import mindeeFinancialDocumentAPI from './creates/mindee_financial_document.js';
+import mindeeFrenchBankAccountDetails from './creates/mindee_fr_bank_account_details.js';
+import mindeeUSBankCheck from './creates/mindee_us_bank_check.js';
+import mindeeUSDrivingLicense from './creates/mindee_us_driving_license.js';
+import fs from "fs";
+import zapierPlatform from "zapier-platform-core";
+
+
+const package_version = JSON.parse(fs.readFileSync('package.json', 'utf8'))['version'];
+
+export default {
+  version: package_version,
+  platformVersion: zapierPlatform.version,
   authentication: authentication,
   creates: {
     [mindeeInvoice.key]: mindeeInvoice,

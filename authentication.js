@@ -4,7 +4,7 @@
  * See LICENSE for full license details.
  */
 
-module.exports = {
+export default {
   type: 'custom',
   test: {
     url: 'https://api.mindee.net/v1/customers/self/products',

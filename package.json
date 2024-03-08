@@ -8,19 +8,21 @@
     "zapier-test": "zapier test"
   },
   "engines": {
-    "node": "~16.19",
-    "npm": "~8.14"
+    "node": "~20.10",
+    "npm": "~10.2.3"
   },
   "dependencies": {
-    "zapier-platform-cli": "15.1.0",
-    "zapier-platform-core": "15.1.0"
+    "mindee": "*",
+    "zapier-platform-cli": "^15.5.3",
+    "zapier-platform-core": "15.5.3"
   },
   "devDependencies": {
-    "mocha": "~10.2.0",
-    "chai": "~4.3.7"
+    "chai": "~5.1.0",
+    "mocha": "~10.3.0"
   },
   "private": true,
   "zapier": {
-    "convertedByCLIVersion": "11.1.0"
-  }
+    "convertedByCLIVersion": "15.5.3"
+  },
+  "type" : "module"
 }
