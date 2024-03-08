@@ -1,6 +1,6 @@
 const defaults = require("./defaults");
 module.exports = {
-  enqueueAndParse: async (z, inputDocument, apiOwner, apiName, apiVersion, headers, maxRetries) => {
+  enqueueAndParse: async (z, inputDocument, apiOwner, apiName, apiVersion, headers, maxRetries=60) => {
     const enqueueResponse = await z.request({
       url: `https://api.mindee.net/v1/products/${apiOwner}/${apiName}/v${apiVersion}/predict_async`,
       method: 'POST',

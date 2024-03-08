@@ -5,7 +5,6 @@
  */
 
 const zapier = require('zapier-platform-core');
-const {describe, it} = require("mocha");
 const App = require('../index.js');
 
 const appTester = zapier.createAppTester(App);
@@ -27,7 +26,7 @@ zapier.tools.env.inject();
 
 describe('Create - Mindee_invoice', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_invoice'].operation.perform, bundle)
+    appTester(App.creates['Mindee_invoice'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -36,7 +35,7 @@ describe('Create - Mindee_invoice', () => {
 
 describe('Create - Mindee_expense_receipt', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_expense_receipt'].operation.perform, bundle)
+    appTester(App.creates['Mindee_expense_receipt'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -45,7 +44,7 @@ describe('Create - Mindee_expense_receipt', () => {
 
 describe('Create - Mindee_passport', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_passport'].operation.perform, bundle)
+    appTester(App.creates['Mindee_passport'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -54,7 +53,7 @@ describe('Create - Mindee_passport', () => {
 
 describe('Create - Mindee_idcard_fr', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
+    appTester(App.creates['Mindee_idcard_fr'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -63,7 +62,7 @@ describe('Create - Mindee_idcard_fr', () => {
 
 describe('Create - Mindee_financial_document', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_financial_document'].operation.perform, bundle)
+    appTester(App.creates['Mindee_financial_document'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -72,7 +71,7 @@ describe('Create - Mindee_financial_document', () => {
 
 describe('Create - Mindee_custom_api', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_custom_api'].operation.perform, bundle)
+    appTester(App.creates['Mindee_custom_api'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -81,7 +80,7 @@ describe('Create - Mindee_custom_api', () => {
 
 describe('Create - Mindee_fr_bank_account_details', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_fr_bank_account_details'].operation.perform, bundle)
+    appTester(App.creates['Mindee_fr_bank_account_details'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -90,7 +89,7 @@ describe('Create - Mindee_fr_bank_account_details', () => {
 
 describe('Create - Mindee_us_bank_check', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_us_bank_check'].operation.perform, bundle)
+    appTester(App.creates['Mindee_us_bank_check'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -99,7 +98,7 @@ describe('Create - Mindee_us_bank_check', () => {
 
 describe('Create - Mindee_us_driving_license', async () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_us_driving_license'].operation.perform, bundle)
+    appTester(App.creates['Mindee_us_driving_license'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
@@ -108,7 +107,7 @@ describe('Create - Mindee_us_driving_license', async () => {
 
 describe('Create - Mindee_generated_api', () => {
   it('should create an object', async () => {
-    await appTester(App.creates['Mindee_generated_api'].operation.perform, bundle)
+    appTester(App.creates['Mindee_generated_api'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
