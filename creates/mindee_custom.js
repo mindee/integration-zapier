@@ -4,16 +4,16 @@
  * See LICENSE for full license details.
  */
 
-import defaults from './defaults.js';
+const defaults = require("./defaults.js");
 
-export default {
+module.exports = {
   operation: { 
     inputFields: [
       {
         key: 'api_url',
         required: true,
         label: 'Your API URL',
-        helpText: 'Go on the page of the concerned API, on platform.mindee.com and paste here the URL of the page',
+        helpText: 'Go on the page of the relevant API, on platform.mindee.com and paste here the URL of the page',
         type:'string',
         placeholder: 'Example: https://platform.mindee.com/account_name/api_name'
       },
@@ -54,7 +54,7 @@ export default {
         ],
         "status": "success",
         "status_code": 201,
-        "url": "http://api.mindee.net/v1/products/test/field_test/v1/predict"
+        "url": "https://api.mindee.net/v1/products/test/field_test/v1/predict"
       },
       "document": {
         "id": "37067c22-4cea-40d3-9809-b9ca1bfedd33",

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     documentInputField: {
         key: 'document',
         required: true,

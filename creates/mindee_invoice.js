@@ -4,9 +4,9 @@
  * See LICENSE for full license details.
  */
 
-import defaults from "./defaults.js";
+const defaults = require("./defaults.js");
 
-export default {
+module.exports = {
   operation: {
     inputFields: [
       defaults.documentInputField,

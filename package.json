@@ -8,11 +8,10 @@
     "zapier-test": "zapier test"
   },
   "engines": {
-    "node": "~20.10",
+    "node": "~18.19.0",
     "npm": "~10.2.3"
   },
   "dependencies": {
-    "mindee": "*",
     "zapier-platform-cli": "^15.5.3",
     "zapier-platform-core": "15.5.3"
   },
@@ -23,6 +22,5 @@
   "private": true,
   "zapier": {
     "convertedByCLIVersion": "15.5.3"
-  },
-  "type" : "module"
+  }
 }

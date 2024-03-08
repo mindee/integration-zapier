@@ -4,11 +4,9 @@
  * See LICENSE for full license details.
  */
 
-import zapier from 'zapier-platform-core';
-import {describe, it} from "mocha";
-import {should} from "chai"; //node seems to misidentify 'should' if this isn't provided
-
-import App from '../index.js';
+const zapier = require('zapier-platform-core');
+const {describe, it} = require("mocha");
+const App = require('../index.js');
 
 const appTester = zapier.createAppTester(App);
 
@@ -20,7 +18,9 @@ const bundle = {
     oauth_token: process.env.OAUTH_TOKEN,
     oauth_token_secret: process.env.OAUTH_TOKEN_SECRET,
   },
-
+  requestSettingsData: {
+    max_async_retries: 60,
+  },
   inputData: {},
 };
 zapier.tools.env.inject();
@@ -100,6 +100,15 @@ describe('Create - Mindee_us_bank_check', () => {
 describe('Create - Mindee_us_driving_license', async () => {
   it('should create an object', async () => {
     await appTester(App.creates['Mindee_us_driving_license'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});
+
+describe('Create - Mindee_generated_api', () => {
+  it('should create an object', async () => {
+    await appTester(App.creates['Mindee_generated_api'].operation.perform, bundle)
       .then(result => {
         result.should.not.be.an.Array();
       })
