@@ -36,8 +36,8 @@ module.exports = {
         .split('/');
       const apiOwner = splitUrl[0];
       const apiName = splitUrl[1];
-      const response = enqueueAndParse(z, bundle.inputData.document, apiOwner, apiName, apiVersion, defaults.postHeaders, bundle.inputData.requestSettingsData.max_async_retries);
-      return promise.then((response) => JSON.parse(response.content));
+      const response = enqueueAndParse(z, bundle.inputData.document, apiOwner, apiName, apiVersion, defaults.postHeaders, 60);
+      return response.then((res) => JSON.parse(res.content));
     },
     sample: {
       "api_request": {
@@ -95,7 +95,7 @@ module.exports = {
             "features": [
               "invoice_page_groups"
             ],
-            "name": "Mindee/invoice_splitter_beta",
+            "name": "Mindee/invoice_splitter",
             "type": "standard",
             "version": "1.0"
           },
@@ -114,11 +114,11 @@ module.exports = {
     },
   },
   key: 'Mindee_generated_api',
-  noun: 'DocTI parsing',
+  noun: 'Any async API',
   display: {
     label: 'DocTI Parsing',
     description:
-      'Extract data from any document using the DocTI',
+      'Extract data from any document using any asynchronous API. E.g. Invoice Splitter, DocTI APIs.',
     hidden: false
   },
 };

@@ -1,6 +1,6 @@
 const defaults = require("./defaults");
 module.exports = {
-  enqueueAndParse: async (z, inputDocument, apiOwner, apiName, apiVersion, headers, maxRetries=60) => {
+  enqueueAndParse: async (z, inputDocument, apiOwner, apiName, apiVersion, headers, maxRetries = 60) => {
     const enqueueResponse = await z.request({
       url: `https://api.mindee.net/v1/products/${apiOwner}/${apiName}/v${apiVersion}/predict_async`,
       method: 'POST',
@@ -12,9 +12,9 @@ module.exports = {
 
     const enqueueJson = JSON.parse(enqueueResponse.content);
 
-    if (enqueueJson?.api_request?.job?.id) {
-      const jobId = enqueueJson.api_request.job.id;
-      let retryCount = 0;
+    let retryCount = 0;
+    if (enqueueJson?.job?.id) {
+      const jobId = enqueueJson.job.id;
       let parseQueuedResponse = null;
       while (retryCount < maxRetries) {
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -28,7 +28,7 @@ module.exports = {
         retryCount++;
         let parseQueuedJson = JSON.parse(parseQueuedResponse.content);
 
-        if (parseQueuedJson && parseQueuedJson?.job && parseQueuedJson.job === "completed" || parseQueuedJson.job === "failed") {
+        if (parseQueuedJson && parseQueuedJson?.job && parseQueuedJson.job?.status === "completed" || parseQueuedJson.job?.status === "failed") {
           return parseQueuedResponse;
         }
       }
@@ -36,7 +36,7 @@ module.exports = {
     if (enqueueJson?.api_request?.error && Object.keys(enqueueJson.api_request.error).length > 0) {
       throw new Error(JSON.stringify(enqueueJson.api_request.error));
     } else {
-      throw new Error("Could not enqueue file properly.");
+      throw new Error(`Could not enqueue file properly.`);
     }
   }
 }

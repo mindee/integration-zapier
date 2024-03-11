@@ -17,9 +17,6 @@ const bundle = {
     oauth_token: process.env.OAUTH_TOKEN,
     oauth_token_secret: process.env.OAUTH_TOKEN_SECRET,
   },
-  requestSettingsData: {
-    max_async_retries: 60,
-  },
   inputData: {},
 };
 zapier.tools.env.inject();
