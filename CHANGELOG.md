@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0
+- add support for Generated APIs
+- add support for async calls
+
 ## 3.0.0
 - update to Receipts v5
 - update to French National Identity Card v2 (Manages new format)
