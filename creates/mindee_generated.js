@@ -20,11 +20,11 @@ module.exports = {
       },
       {
         key: 'api_version',
-        required: false,
-        label: 'API Version (latest by default)',
+        required: true,
+        label: 'API Version',
         helpText: 'Available in the live interface.',
         type: 'string',
-        placeholder: 'Example: 1.6'
+        placeholder: 'Example: 2 or 1.6'
       },
       defaults.documentInputField,
     ],
