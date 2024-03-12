@@ -114,9 +114,9 @@ module.exports = {
     },
   },
   key: 'Mindee_generated_api',
-  noun: 'Any async API',
+  noun: 'Any Async API',
   display: {
-    label: 'Any async API',
+    label: 'Any Async API',
     description:
       'Extract data from any document using any asynchronous API. E.g. Invoice Splitter, Resume, DocTI APIs.',
     hidden: false
