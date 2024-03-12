@@ -20,10 +20,10 @@ const fs = require("fs");
 const zapierPlatform = require("zapier-platform-core");
 
 
-const package_version = JSON.parse(fs.readFileSync('package.json', 'utf8'))['version'];
+const packageVersion = JSON.parse(fs.readFileSync('package.json', 'utf8'))['version'];
 
 module.exports = {
-  version: package_version,
+  version: packageVersion,
   platformVersion: zapierPlatform.version,
   authentication: authentication,
   creates: {
