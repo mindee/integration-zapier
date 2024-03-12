@@ -118,7 +118,7 @@ module.exports = {
   display: {
     label: 'Any async API',
     description:
-      'Extract data from any document using any asynchronous API. E.g. Invoice Splitter, DocTI APIs.',
+      'Extract data from any document using any asynchronous API. E.g. Invoice Splitter, Resume, DocTI APIs.',
     hidden: false
   },
 };
