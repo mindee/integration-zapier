@@ -1,15 +1,12 @@
-/** Copyright (C) 2021-2023, Mindee.
+/** Copyright (C) 2021-2024, Mindee.
  *
  * This program is licensed under the MIT License.
  * See LICENSE for full license details.
  */
 
-const chai = require('chai');
-const should = chai.should;
-
 const zapier = require('zapier-platform-core');
+const App = require('../index.js');
 
-const App = require('../index');
 const appTester = zapier.createAppTester(App);
 
 const bundle = {
@@ -20,7 +17,6 @@ const bundle = {
     oauth_token: process.env.OAUTH_TOKEN,
     oauth_token_secret: process.env.OAUTH_TOKEN_SECRET,
   },
-
   inputData: {},
 };
 zapier.tools.env.inject();
@@ -97,7 +93,7 @@ describe('Create - Mindee_us_bank_check', () => {
   });
 });
 
-describe('Create - Mindee_us_driving_license', () => {
+describe('Create - Mindee_us_driving_license', async () => {
   it('should create an object', async () => {
     appTester(App.creates['Mindee_us_driving_license'].operation.perform, bundle)
       .then(result => {
@@ -106,3 +102,11 @@ describe('Create - Mindee_us_driving_license', () => {
   });
 });
 
+describe('Create - Mindee_generated_api', () => {
+  it('should create an object', async () => {
+    appTester(App.creates['Mindee_generated_api'].operation.perform, bundle)
+      .then(result => {
+        result.should.not.be.an.Array();
+      })
+  });
+});

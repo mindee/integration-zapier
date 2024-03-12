@@ -4,7 +4,7 @@
  * See LICENSE for full license details.
  */
 
-const defaults = require("./defaults");
+const defaults = require("./defaults.js");
 
 module.exports = {
   operation: {
