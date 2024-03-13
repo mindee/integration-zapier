@@ -1,4 +1,3 @@
-const defaults = require("./defaults");
 module.exports = {
   enqueueAndParse: async (z, inputDocument, apiOwner, apiName, apiVersion, headers, maxRetries = 60) => {
     const enqueueResponse = await z.request({
@@ -32,11 +31,10 @@ module.exports = {
           return parseQueuedResponse;
         }
       }
-    }
-    if (enqueueJson?.api_request?.error && Object.keys(enqueueJson.api_request.error).length > 0) {
-      throw new Error(JSON.stringify(enqueueJson.api_request.error));
+    } else if (enqueueJson?.api_request?.error && Object.keys(enqueueJson.api_request.error).length > 0) {
+      return Promise.reject(new Error(JSON.stringify(enqueueJson.api_request.error)));
     } else {
-      throw new Error(`Could not enqueue file properly.`);
+      return Promise.reject(new Error(`Could not enqueue file properly.`));
     }
   }
 }
