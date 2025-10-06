@@ -8,8 +8,8 @@
     "zapier-test": "zapier test"
   },
   "engines": {
-    "node": "~18.19.0",
-    "npm": "~10.2.3"
+    "node": "~18.20.8",
+    "npm": "~10.8.3"
   },
   "dependencies": {
     "zapier-platform-cli": "^17.7.2",
