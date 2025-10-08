@@ -4,7 +4,8 @@ on:
   workflow_call:
 
 env:
-  MINDEE_API_KEY: ${{ secrets.MINDEE_API_KEY_SE_TESTS }}
+  MINDEE_V2_API_KEY: ${{ secrets.MINDEE_V2_SE_TESTS_API_KEY }}
+  MINDEE_V2_FINDOC_MODEL_ID: ${{ secrets.MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID }}
 
 jobs:
   run-tests:
@@ -25,6 +26,9 @@ jobs:
       - name: Install Node.js dependencies
         run: |
           npm ci
+
+      - name: Build JS
+        run: npm run build
 
       - name: Test code
         run: npm run zapier test

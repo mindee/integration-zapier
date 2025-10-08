@@ -8,6 +8,9 @@ permissions:
   pull-requests: read
 
 jobs:
+  static_analysis:
+    uses: ./.github/workflows/_static-analysis.yml
   test_units:
     uses: ./.github/workflows/_test-units.yml
+    needs: static_analysis
     secrets: inherit
