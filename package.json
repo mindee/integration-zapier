@@ -1,6 +1,6 @@
 {
   "name": "mindee-receipt-parsing",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Parse your document using the Mindee API.",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,7 @@
     "zapier-test": "zapier test"
   },
   "engines": {
-    "node": "~18.20.8",
-    "npm": "~10.8.3"
+    "node": "^18"
   },
   "dependencies": {
     "zapier-platform-cli": "^17.7.2",
@@ -18,6 +17,9 @@
   "devDependencies": {
     "chai": "~6.2.0",
     "mocha": "~11.7.4"
+  },
+  "overrides": {
+    "@types/node": "^18"
   },
   "private": true,
   "zapier": {
