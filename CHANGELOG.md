@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.0.0 - 2025-10-21
+- Add support for Mindee V2 API
+- Remove support for all Mindee V1 APIs
+
 ## v3.2.2 - 2025-10-20
 - Update documentation links
 
