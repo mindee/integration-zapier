@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.1
+- Fix CI issues
+- Bump dependencies
+- Update README
+
 ## 3.1.0
 - add support for Generated APIs
 - add support for async calls
