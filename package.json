@@ -4,8 +4,11 @@
   "description": "Parse your document using the Mindee API.",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --build",
     "test": "mocha --recursive -t 10000",
-    "zapier": "zapier"
+    "zapier": "zapier",
+    "lint": "eslint  './src/**/*.ts' --report-unused-disable-directives && echo 'Your .ts files look good.'",
+    "lint-fix": "eslint './src/**/*.ts' --fix"
   },
   "engines": {
     "node": "^18"
@@ -15,8 +18,13 @@
     "zapier-platform-core": "17.8.0"
   },
   "devDependencies": {
+    "@types/chai": "^5.2.2",
+    "@types/mocha": "^10.0.10",
+    "@typescript-eslint/eslint-plugin": "^8.46.0",
     "chai": "~6.2.0",
-    "mocha": "~11.7.4"
+    "eslint": "^9.15.0",
+    "mocha": "~11.7.4",
+    "typescript": "^5.9.3"
   },
   "overrides": {
     "@types/node": "^18"
