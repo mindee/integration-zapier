@@ -1,25 +1,24 @@
 import { defineApp, version as platformVersion } from "zapier-platform-core";
-import packageJson from "../package.json" with { type: "json" };
-
+import { version as appVersion } from "../package.json";
+import searchModels from "./searches/searchModels";
 import authentication from "./authentication";
-import someCreate from "./creates/some-create";
-import someSearch from "./searches/some-search";
-import someTrigger from "./triggers/some-trigger";
 
+import createEnqueue from "./creates/enqueue.js";
+
+/**
+ * Defines the Zapier app.
+ */
 export default defineApp({
-    // IMPORTANT: Note the use of `defineApp`
-    version: packageJson.version,
-    platformVersion,
+  version: appVersion,
+  platformVersion,
 
-    authentication,
+  authentication,
 
-    creates: {
-        [someCreate.key]: someCreate,
-    },
-    searches: {
-        [someSearch.key]: someSearch,
-    },
-    triggers: {
-        [someTrigger.key]: someTrigger,
-    },
+  creates: {
+    [createEnqueue.key]: createEnqueue
+  },
+  searches: {
+    [searchModels.key]: searchModels,
+  },
+  triggers: {},
 });
