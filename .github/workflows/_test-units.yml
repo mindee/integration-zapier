@@ -23,5 +23,8 @@ jobs:
         run: |
           npm ci
 
+      - name: Build JS
+        run: npm run build
+
       - name: Test code
         run: npm run zapier test

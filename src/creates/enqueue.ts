@@ -4,15 +4,15 @@ import {
   type CreatePerform,
   type InferInputData,
 } from "zapier-platform-core";
-import { enqueue, setupEnqueueBody } from "../utils/mindeeApi";
-import jobSample from "../samples/okProcessing.json";
+import { enqueue, setupEnqueueBody } from "../utils/mindeeApi.js";
+import jobSample from "../samples/jobProcessing.json" with { type: "json" };
 
 /**
  * Defines the input fields for the enqueue operation.
  */
 const inputFields = defineInputFields([
   {
-    key: "model_id",
+    key: "modelId",
     label: "Model ID",
     required: true,
     type: "string",
@@ -71,7 +71,7 @@ const inputFields = defineInputFields([
       "Enhance extraction accuracy with Retrieval-Augmented Generation.",
   },
   {
-    key: "raw_text",
+    key: "rawText",
     label: "Enable Confidence Scores",
     type: "string",
     choices: [
@@ -81,7 +81,7 @@ const inputFields = defineInputFields([
     ],
     default: "default",
     helpText:
-      "Extract full document text as strings and fill the `raw_text` attribute.",
+      "Extract full document text as strings and fill the `rawText` attribute.",
   },
 ]);
 
@@ -92,8 +92,9 @@ const inputFields = defineInputFields([
  * @returns A promise that resolves to the enqueue results, containing queue information.
  */
 const perform = (async (z, bundle) => {
+
   const body = setupEnqueueBody(bundle) as InferInputData<typeof inputFields>;
-  const response = await enqueue(z, bundle, body);
+  const response = await enqueue(z, body);
   return response.data;
 }) satisfies CreatePerform<InferInputData<typeof inputFields>>;
 

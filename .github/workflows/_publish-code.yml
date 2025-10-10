@@ -1,6 +1,3 @@
-#
-# Publish releases to Zapier
-#
 name: Publish Code
 
 on:
@@ -9,7 +6,7 @@ on:
 
 jobs:
   publish:
-    name: Publish release to NPM
+    name: Publish release to Zapier
     runs-on: ubuntu-latest
 
     steps:

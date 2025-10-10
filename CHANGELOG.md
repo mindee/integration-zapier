@@ -29,10 +29,8 @@
 - [Financial Docs OCR](https://developers.mindee.com/docs/financial-documents-ocr) v1
 - Update Zapier Core to v13
 
-
 ## 2.0.1
 - fixes in the URL structure to support new API Builder versions
-
 
 ## 2.0.0
 - add the Custom APIs (from API Builder)
@@ -40,7 +38,6 @@
 - update to Receipt v4 (new fields including line items, better performances)
 - new authentication and connection based on a single api key for all APIs
 - slight changes in the UX
-
 
 ## 1.2.0
 - add the French ID Card API (Carte Nationale d'Identité)
@@ -50,10 +47,8 @@
 - upgrade Zapier & Mocha dependencies
 - update the help message to point to the new create your API key documentation
 
-
 ## 1.1.0
 - Invoice OCR v3 support: see [API changelog](https://developers.mindee.com/docs/releases-notes-invoice-ocr#version-3) for details.
-
 
 ## 1.0.2
 - [Invoice OCR](https://developers.mindee.com/docs/invoice-ocr) v2

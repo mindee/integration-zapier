@@ -2,7 +2,7 @@ import {
   defineTrigger,
   type PollingTriggerPerform,
 } from "zapier-platform-core";
-import { MINDEE_API_V2_URL } from "../constants";
+import { MINDEE_API_V2_URL } from "../constants.js";
 
 const PER_PAGE = 50;
 /**

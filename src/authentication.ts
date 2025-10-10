@@ -1,7 +1,6 @@
 import type { Authentication, Request } from "zapier-platform-core";
 
-import { MINDEE_API_V2_URL } from "./constants";
-import { version as appVersion } from "../package.json";
+import { appVersion, MINDEE_API_V2_URL } from "./constants.js";
 
 /**
  * Defines the authentication schema for the Mindee V2 API.
@@ -14,7 +13,7 @@ export default {
     params: {},
     headers: {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      Authorization: "{{bundle.authData.api_key}}",
+      Authorization: "{{bundle.authData.apiKey}}",
       // eslint-disable-next-line @typescript-eslint/naming-convention
       "User-Agent": `mindee-api-zapier@v${appVersion}`,
     },
@@ -23,14 +22,14 @@ export default {
   fields: [
     {
       computed: false,
-      key: "connection_name",
+      key: "connectionName",
       required: true,
       type: "string",
       helpText: "Name of the connection.",
     },
     {
       computed: false,
-      key: "api_key",
+      key: "apiKey",
       required: true,
       type: "password",
       helpText:
