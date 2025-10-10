@@ -4,11 +4,12 @@ import {
   type CreatePerform,
   type InferInputData,
 } from "zapier-platform-core";
-import { enqueue, setupEnqueueBody } from "../utils/mindeeApi";
-import jobSample from "../samples/okProcessing.json";
+import { enqueue, getInference, setupEnqueueBody } from "../utils/mindeeApi";
+import completeInference from "../samples/complete.json";
+
 
 /**
- * Defines the input fields for the enqueue operation.
+ * Defines the input fields for the enqueueAndGetInference operation.
  */
 const inputFields = defineInputFields([
   {
@@ -83,56 +84,56 @@ const inputFields = defineInputFields([
     helpText:
       "Extract full document text as strings and fill the `raw_text` attribute.",
   },
+  {
+    key: "maxPollingTimeOut",
+    required: true,
+    default: "180",
+    type: "number",
+    helpText: "Maximum polling timeout in seconds."
+  }
 ]);
 
 /**
- * Performs the enqueue operation.
+ * Performs the enqueueAndGetInference operation.
  * @param z Zapier SDK
  * @param bundle Zapier bundle
- * @returns A promise that resolves to the enqueue results, containing queue information.
+ * @returns A promise that resolves to the enqueueAndGetInference results, containing the result.
  */
 const perform = (async (z, bundle) => {
   const body = setupEnqueueBody(bundle) as InferInputData<typeof inputFields>;
-  const response = await enqueue(z, bundle, body);
+  const jobId = await enqueue(z, bundle, body).then(response => response.data.job.id);
+  const response = await getInference(z, jobId);
   return response.data;
 }) satisfies CreatePerform<InferInputData<typeof inputFields>>;
 
-/**
- * Defines the enqueue operation.
- */
 export default defineCreate({
-  key: "enqueue",
-  noun: "Enqueue",
+  // see here for a full list of available properties:
+  // https://github.com/zapier/zapier-platform/blob/main/packages/schema/docs/build/schema.md#createschema
+  key: "enqueue_and_get_inference",
+  noun: "Enqueueandgetinference",
 
   display: {
-    label: "Enqueue a File",
-    description: "Enqueues a file to the server and returns information about the queue."
+    label: "Create Enqueueandgetinference",
+    description: "Creates a new enqueueandgetinference, probably with input from previous steps."
   },
 
   operation: {
     perform,
     inputFields,
-    sample: jobSample,
+    sample: completeInference,
     outputFields: [
-      {
-        key: "job__id",
-        label: "ID of the queue",
-        type: "string"
-      },
-      {
-        key:
-          "job__model_id",
-        label: "Model ID",
-        type: "string"
-      },
-      { key: "job__filename", label: "Filename", type: "string" },
-      { key: "job__alias", label: "(Optional) Alias", type: "string" },
-      { key: "job__created_at", label: "Creation date", type: "datetime" },
-      { key: "job__status", label: "Queue status", type: "string" },
-      { key: "job__polling_url", label: "Polling URL", type: "string" },
-      { key: "job__result_url", label: "Result URL", type: "string" },
-      { key: "job__error", label: "Error" },
-      { key: "job__webhooks[]", label: "Webhooks" }
+      { key: "inference__id", label: "Inference ID" },
+      { key: "inference__model__id", label: "Model ID" },
+      { key: "inference__file__name", label: "File Name" },
+      { key: "inference__file__alias", label: "File Alias" },
+      { key: "inference__file__page_count", label: "File Page Count", type: "integer" },
+      { key: "inference__file__mime_type", label: "File MIME Type" },
+      { key: "inference__result__fields", label: "Result Fields" },
+      { key: "inference__result__raw_text", label: "Result Raw Text" },
+      { key: "inference__active_options__raw_text", label: "Option: Raw Text", type: "boolean" },
+      { key: "inference__active_options__rag", label: "Option: RAG", type: "boolean" },
+      { key: "inference__active_options__polygon", label: "Option: Polygon", type: "boolean" },
+      { key: "inference__active_options__confidence", label: "Option: Confidence", type: "boolean" },
     ],
   },
 });
