@@ -11,7 +11,7 @@ import { MINDEE_API_V2_URL } from "../constants";
  */
 const inputFields = defineInputFields([
   {
-    key: "modelId",
+    key: "model_id",
     required: true,
     type: "string"
   },
@@ -88,14 +88,30 @@ const inputFields = defineInputFields([
  * @returns A promise that resolves to the enqueue results, containing queue information.
  */
 const perform = (async (z, bundle) => {
+  const body: InferInputData<typeof inputFields> = {
+    // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
+    model_id: bundle.inputData.model_id,
+    file: bundle.inputData.file
+  };
+  if (bundle.inputData.alias && bundle.inputData.alias.length > 0) {
+    body.alias = bundle.inputData.alias;
+  }
+  if (bundle.inputData.confidence !== "default") {
+    body.confidence = bundle.inputData.confidence;
+  }
+  if (bundle.inputData.polygon !== "default") {
+    body.polygon = bundle.inputData.polygon;
+  }
+  if (bundle.inputData.rag !== "default") {
+    body.rag = bundle.inputData.rag;
+  }
+  if (bundle.inputData.rawText !== "default") {
+    body.rawText = bundle.inputData.rawText;
+  }
   const response = await z.request({
     method: "POST",
     url: `${MINDEE_API_V2_URL}/v2`,
-    body: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
-      model_id: bundle.inputData.modelId,
-      file: bundle.inputData.file
-    },
+    body,
   });
   return response.data;
 }) satisfies CreatePerform<InferInputData<typeof inputFields>>;
