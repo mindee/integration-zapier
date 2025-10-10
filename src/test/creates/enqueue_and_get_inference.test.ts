@@ -17,7 +17,7 @@ describe("creates.enqueue_and_get_inference", () => {
           file: {
             path: "./fixtures/invoice.pdf"
           },
-          model_id: process.env["MINDEE_V2_MODEL_ID"],
+          modelId: process.env["MINDEE_V2_MODEL_ID"],
         }
       }
     };

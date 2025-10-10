@@ -13,7 +13,7 @@ describe("triggers.search_models", () => {
     const bundle = {
       authData: { apiKey: process.env["MINDEE_V2_API_KEY"] },
       inputData: {
-        model_id: process.env["MINDEE_V2_MODEL_ID"]
+        modelId: process.env["MINDEE_V2_MODEL_ID"]
       }
     };
 

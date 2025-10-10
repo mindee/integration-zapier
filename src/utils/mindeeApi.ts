@@ -10,22 +10,17 @@ import { setTimeout } from "node:timers/promises";
  */
 async function pollServer(z: ZObject, jobId: string): Promise<HttpResponse> {
   return await z.request({
-    url: `${MINDEE_API_V2_URL}/v2/search/models`,
-    params: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
-      job_id: jobId,
-    },
+    url: `${MINDEE_API_V2_URL}/v2/jobs/${jobId}`
   });
 }
 
 /**
  * Enqueues a file to the server and returns information about the queue.
  * @param z Zapier SDK.
- * @param bundle Zapier bundle.
  * @param body The body of the request.
  * @returns A promise that resolves to the response from the server.
  */
-export async function enqueue(z: ZObject, bundle: any, body: any): Promise<HttpResponse> {
+export async function enqueue(z: ZObject, body: any): Promise<HttpResponse> {
   return await z.request({
     method: "POST",
     url: `${MINDEE_API_V2_URL}/v2/inferences/enqueue`,
@@ -40,26 +35,33 @@ export async function enqueue(z: ZObject, bundle: any, body: any): Promise<HttpR
  */
 export function setupEnqueueBody(bundle: any): Record<string, any> {
   const body: Record<string, any> = {
-    // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
-    model_id: bundle.inputData.model_id,
+    model_id: bundle.inputData.modelId,
     file: bundle.inputData.file
   };
   body.file = bundle.inputData.file;
   if (bundle.inputData.alias && bundle.inputData.alias.length > 0) {
     body.alias = bundle.inputData.alias;
   }
-  if (bundle.inputData.confidence !== "default") {
+  if (bundle.inputData.confidence && bundle.inputData.confidence !== "default") {
     body.confidence = bundle.inputData.confidence;
+  } else {
+    delete body.confidence;
   }
-  if (bundle.inputData.polygon !== "default") {
+  if (bundle.inputData.polygon && bundle.inputData.polygon !== "default") {
     body.polygon = bundle.inputData.polygon;
+  } else {
+    delete body.polygon;
   }
-  if (bundle.inputData.rag !== "default") {
+  if (bundle.inputData.rag && bundle.inputData.rag !== "default") {
     body.rag = bundle.inputData.rag;
+  } else {
+    delete body.rag;
   }
-  if (bundle.inputData.raw_text !== "default") {
+  if (bundle.inputData.rawText && bundle.inputData.rawText !== "default") {
     // eslint-disable-next-line camelcase
-    body.raw_text = bundle.inputData.raw_text;
+    body.raw_text = bundle.inputData.rawtext;
+  } else {
+    delete body.raw_text;
   }
   return body;
 }
