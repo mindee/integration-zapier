@@ -1,5 +1,5 @@
-import { describe, it } from "mocha";
-import { expect } from "chai";
+// TODO
+import { describe, expect, it } from "vitest";
 import zapier from "zapier-platform-core";
 
 import App from "../../index";
@@ -10,11 +10,16 @@ zapier.tools.env.inject();
 
 describe("searches.inference", () => {
   it("should run", async () => {
-    const bundle = { inputData: { jobId: "1234567890" } };
+    const bundle = {
+      authData: { apiKey: process.env["MINDEE_V2_API_KEY"] },
+      inputData: {
+        jobId: process.env["MINDEE_V2_MODEL_ID"],
+      }
+    };
 
     // @ts-expect-error TBD
     const results = await appTester(App.searches["inference"].operation.perform, bundle);
-    expect(results).to.not.be.undefined;
+    expect(results).toBeDefined();
     // TODO: add more assertions
   });
 });

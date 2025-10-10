@@ -28,7 +28,7 @@ async function pollServer(z: ZObject, jobId: string): Promise<HttpResponse> {
 export async function enqueue(z: ZObject, bundle: any, body: any): Promise<HttpResponse> {
   return await z.request({
     method: "POST",
-    url: `${MINDEE_API_V2_URL}/v2`,
+    url: `${MINDEE_API_V2_URL}/v2/inferences/enqueue`,
     body,
   });
 }
@@ -44,6 +44,7 @@ export function setupEnqueueBody(bundle: any): Record<string, any> {
     model_id: bundle.inputData.model_id,
     file: bundle.inputData.file
   };
+  body.file = bundle.inputData.file;
   if (bundle.inputData.alias && bundle.inputData.alias.length > 0) {
     body.alias = bundle.inputData.alias;
   }

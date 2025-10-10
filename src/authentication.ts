@@ -14,7 +14,7 @@ export default {
     params: {},
     headers: {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      Authorization: "{{bundle.authData.api_key}}",
+      Authorization: "{{bundle.authData.apiKey}}",
       // eslint-disable-next-line @typescript-eslint/naming-convention
       "User-Agent": `mindee-api-zapier@v${appVersion}`,
     },
@@ -30,7 +30,7 @@ export default {
     },
     {
       computed: false,
-      key: "api_key",
+      key: "apiKey",
       required: true,
       type: "password",
       helpText:
