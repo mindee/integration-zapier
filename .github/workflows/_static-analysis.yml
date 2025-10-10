@@ -1,0 +1,29 @@
+name: lint.yml
+on:
+  workflow_call:
+jobs:
+  static-check:
+    name: Run Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Test lint
+        run: npm run lint
+
+      - name: Install NPM License Checker
+        run: npm install -g license-checker
+
+      - name: Check licences, no GPL or APGL allowed
+        run: license-checker | grep -P -B1 '(?<=[A\W])GPL' && exit 1 || exit 0
