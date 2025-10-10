@@ -1,0 +1,1 @@
+export const MINDEE_API_V2_URL = "https://api-v2.mindee.net";
