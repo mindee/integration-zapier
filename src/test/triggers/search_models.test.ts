@@ -8,12 +8,12 @@ const appTester = zapier.createAppTester(App);
 // read the `.env` file into the environment, if available
 zapier.tools.env.inject();
 
-describe("creates.enqueue", () => {
+describe("triggers.search_models", () => {
   it("should run", async () => {
     const bundle = { inputData: {} };
 
     // @ts-expect-error TBD
-    const results = await appTester(App.creates["enqueue"].operation.perform, bundle);
+    const results = await appTester(App.triggers["search_models"].operation.perform, bundle);
     expect(results).to.not.be.undefined;
     // TODO: add more assertions
   });
