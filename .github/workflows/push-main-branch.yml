@@ -7,7 +7,7 @@ on:
 
 jobs:
   test_units:
-    uses: ./.github/workflows/_test-units.yml@main
+    uses: ./.github/workflows/_test-units.yml
     secrets: inherit
   tag:
     uses: mindee/client-lib-actions/.github/workflows/tag-version.yml@main
