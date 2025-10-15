@@ -1,0 +1,13 @@
+name: Pull Request
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  test_units:
+    uses: ./.github/workflows/_test-units.yml
+    secrets: inherit

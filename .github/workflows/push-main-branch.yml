@@ -1,0 +1,14 @@
+name: Push Main Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test_units:
+    uses: ./.github/workflows/_test-units.yml@main
+    secrets: inherit
+  tag:
+    uses: mindee/client-lib-actions/.github/workflows/tag-version.yml@main
+    needs: test_units
