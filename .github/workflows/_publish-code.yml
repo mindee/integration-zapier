@@ -1,27 +1,29 @@
-name: Test
+#
+# Publish releases to Zapier
+#
+name: Publish Code
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
-  run-tests:
-    name: Run Tests
+  publish:
+    name: Publish release to NPM
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: "18"
+          node-version: 18
           cache: "npm"
 
       - name: Install Node.js dependencies
-        run: |
-          npm ci
+        run: npm ci
 
-      - name: Test code
-        run: npm run zapier test
+      - name: Publish
+        run: npm run zapier push

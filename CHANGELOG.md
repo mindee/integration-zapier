@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.2
+- Update Zapier platform to 17.8.0
+
 ## 3.1.1
 - Fix CI issues
 - Bump dependencies
