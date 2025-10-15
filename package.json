@@ -11,8 +11,8 @@
     "node": "^18"
   },
   "dependencies": {
-    "zapier-platform-cli": "~17.8.0",
-    "zapier-platform-core": "~17.8.0"
+    "zapier-platform-cli": "17.8.0",
+    "zapier-platform-core": "17.8.0"
   },
   "devDependencies": {
     "chai": "~6.2.0",
