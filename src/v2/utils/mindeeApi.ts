@@ -1,16 +1,16 @@
 import { HttpResponse, ZObject } from "zapier-platform-core";
-import { MINDEE_API_V2_URL } from "../constants.js";
+import { MINDEE_V2_BASE_URL } from "../../constants.js";
 import { setTimeout } from "node:timers/promises";
 
 /**
- * Gets the job for a given job ID.
+ * Get the status of an inference that was previously enqueued.
  * @param z Zapier SDK.
  * @param jobId The ID of the job to poll.
  * @returns A promise that resolves to the response from the server.
  */
-async function reqJobGet(z: ZObject, jobId: string): Promise<HttpResponse> {
+export async function reqJobGet(z: ZObject, jobId: string): Promise<HttpResponse> {
   return await z.request({
-    url: `${MINDEE_API_V2_URL}/v2/jobs/${jobId}`
+    url: `${MINDEE_V2_BASE_URL}/v2/jobs/${jobId}`,
   });
 }
 
@@ -20,23 +20,23 @@ async function reqJobGet(z: ZObject, jobId: string): Promise<HttpResponse> {
  * @param inferenceId The ID of the inference to poll.
  * @returns A promise that resolves to the response from the server.
  */
-async function reqInferenceGet(z: ZObject, inferenceId: string): Promise<HttpResponse> {
+export async function reqInferenceGet(z: ZObject, inferenceId: string): Promise<HttpResponse> {
   return await z.request({
-    url: `${MINDEE_API_V2_URL}/v2/inferences/${inferenceId}`
+    url: `${MINDEE_V2_BASE_URL}/v2/inferences/${inferenceId}`,
   });
 }
 
 /**
- * Enqueues a file to the server and returns information about the queue.
+ * Send a file to the asynchronous processing queue for an inference.
  * @param z Zapier SDK.
  * @param body The body of the request.
  * @returns A promise that resolves to the response from the server.
  */
-export async function enqueue(z: ZObject, body: any): Promise<HttpResponse> {
+export async function reqInferencePost(z: ZObject, body: any): Promise<HttpResponse> {
   return await z.request({
     method: "POST",
-    url: `${MINDEE_API_V2_URL}/v2/inferences/enqueue`,
-    body,
+    url: `${MINDEE_V2_BASE_URL}/v2/inferences/enqueue`,
+    form: body,
   });
 }
 

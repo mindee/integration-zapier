@@ -1,12 +1,8 @@
 import { defineApp, version as platformVersion } from "zapier-platform-core";
 import { appVersion } from "./constants.js";
 import authentication from "./authentication.js";
-import createEnqueue from "./creates/enqueue.js";
-import findInference from "./searches/inference.js";
-import searchModels from "./triggers/searchModels.js";
+import * as v2 from "./v2/index.js";
 import { addAuthHeader } from "./middleware.js";
-
-import createEnqueueAndGetInference from "./creates/enqueueAndGetInference.js";
 
 /**
  * Defines the Zapier app.
@@ -14,17 +10,17 @@ import createEnqueueAndGetInference from "./creates/enqueueAndGetInference.js";
 export default defineApp({
   version: appVersion,
   platformVersion,
-
   authentication,
   beforeRequest: [addAuthHeader],
   creates: {
-    [createEnqueue.key]: createEnqueue,
-    [createEnqueueAndGetInference.key]: createEnqueueAndGetInference
+    [v2.createEnqueue.key]: v2.createEnqueue,
+    [v2.createEnqueueAndGetInference.key]: v2.createEnqueueAndGetInference,
   },
   searches: {
-    [findInference.key]: findInference
+    [v2.inferenceByPolling.key]: v2.inferenceByPolling,
+    [v2.inference.key]: v2.inference,
   },
   triggers: {
-    [searchModels.key]: searchModels
+    [v2.searchModels.key]: v2.searchModels,
   },
 });

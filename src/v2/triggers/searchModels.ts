@@ -2,7 +2,7 @@ import {
   defineTrigger,
   type PollingTriggerPerform,
 } from "zapier-platform-core";
-import { MINDEE_API_V2_URL } from "../constants.js";
+import { MINDEE_V2_BASE_URL } from "../../constants.js";
 
 const PER_PAGE = 50;
 /**
@@ -18,7 +18,7 @@ const perform = (async (z, bundle) => {
 
   const res = await z.request({
     method: "GET",
-    url: `${MINDEE_API_V2_URL}/v2/search/models`,
+    url: `${MINDEE_V2_BASE_URL}/v2/search/models`,
     // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
     params: { name: search, page, per_page: PER_PAGE },
   });

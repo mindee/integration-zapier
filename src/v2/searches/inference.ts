@@ -5,24 +5,17 @@ import {
   type InferInputData,
 } from "zapier-platform-core";
 import completeInference from "../samples/inferenceComplete.json" with { type: "json" };
-import { pollForInference } from "../utils/mindeeApi.js";
+import { reqInferenceGet } from "../utils/mindeeApi.js";
 
 /**
  * Defines the input fields for the inference search.
  */
 const inputFields = defineInputFields([
   {
-    key: "jobId",
+    key: "inferenceId",
     required: true,
-    helpText: "Find the inference associated with this ID.",
+    helpText: "The inference UUID.",
   },
-  {
-    key: "maxPollingTimeOut",
-    required: true,
-    default: "180",
-    type: "number",
-    helpText: "Maximum polling timeout in seconds."
-  }
 ]);
 
 /**
@@ -32,7 +25,7 @@ const inputFields = defineInputFields([
  * @returns A promise that resolves to the inference results, containing the result.
  */
 const perform = (async (z, bundle) => {
-  const response= await pollForInference(z, bundle.inputData.jobId, bundle.inputData.maxPollingTimeOut);
+  const response= await reqInferenceGet(z, bundle.inputData.inferenceId);
   return response.data;
 }) satisfies SearchPerform<InferInputData<typeof inputFields>>;
 
@@ -45,7 +38,7 @@ export default defineSearch({
 
   display: {
     label: "Get Inference",
-    description: "Gets an inference based on ID.",
+    description: "Gets an inference by ID.",
   },
 
   operation: {

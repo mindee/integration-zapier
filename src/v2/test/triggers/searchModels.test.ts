@@ -2,7 +2,7 @@
 import { describe, expect, it } from "vitest";
 import zapier from "zapier-platform-core";
 
-import App from "../../index.js";
+import App from "../../../index.js";
 
 const appTester = zapier.createAppTester(App);
 // read the `.env` file into the environment, if available

@@ -1,6 +1,6 @@
 import type { Authentication, Request } from "zapier-platform-core";
 
-import { appVersion, MINDEE_API_V2_URL } from "./constants.js";
+import { appVersion, MINDEE_V2_BASE_URL } from "./constants.js";
 
 /**
  * Defines the authentication schema for the Mindee V2 API.
@@ -8,7 +8,7 @@ import { appVersion, MINDEE_API_V2_URL } from "./constants.js";
 export default {
   type: "custom",
   test: {
-    url: `${MINDEE_API_V2_URL}/v2/search/models`,
+    url: `${MINDEE_V2_BASE_URL}/v2/search/models`,
     method: "GET",
     params: {},
     headers: {

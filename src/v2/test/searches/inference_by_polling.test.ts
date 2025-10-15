@@ -2,9 +2,10 @@
 import { describe, expect, it } from "vitest";
 import zapier from "zapier-platform-core";
 
-import App from "../../index.js";
+import App from "../../../index.js";
 
 const appTester = zapier.createAppTester(App);
+
 // read the `.env` file into the environment, if available
 zapier.tools.env.inject();
 
@@ -19,11 +20,10 @@ describe("searches.inference", () => {
 
     try {
       // @ts-expect-error TBD
-      await appTester(App.searches["inference"].operation.perform, bundle);
+      await appTester(App.searches["inference_by_polling"].operation.perform, bundle);
       expect.fail("Expected the operation to throw an error for Non-existing job ID");
     } catch (error: any) {
-      // Check that the error has the expected 404 status
-      expect(error.message).toContain(":404");
+      expect(error.message).toContain("404");
     }
 
     await expect(
