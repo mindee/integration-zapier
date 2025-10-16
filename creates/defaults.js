@@ -7,9 +7,4 @@ module.exports = {
         type: 'file',
         placeholder: 'Specify the file or the public HTTPS URL here...'
     },
-    postHeaders: {
-        'Authorization': 'Token {{bundle.authData.api_key}}',
-        'content-type': 'application/json',
-        'User-Agent': 'mindee-api-zapier'
-    }
 };

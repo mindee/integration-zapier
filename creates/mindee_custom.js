@@ -5,9 +5,10 @@
  */
 
 const defaults = require("./defaults.js");
+const { MINDEE_V1_BASE_URL } = require("../constants.js");
 
 module.exports = {
-  operation: { 
+  operation: {
     inputFields: [
       {
         key: 'api_url',
@@ -36,14 +37,12 @@ module.exports = {
       const apiOwner = splitUrl[0];
       const apiName = splitUrl[1];
       const promise = z.request({
-        url: `https://api.mindee.net/v1/products/${apiOwner}/${apiName}/v${apiVersion}/predict`,
-        method: 'POST',
+        url: `${MINDEE_V1_BASE_URL}/v1/products/${apiOwner}/${apiName}/v${apiVersion}/predict`,
+        method: "POST",
         body: {
-          'document': bundle.inputData.document
-        },
-        headers: defaults.postHeaders,
+          "document": bundle.inputData.document
+        }
       });
-
       return promise.then((response) => JSON.parse(response.content));
     },
     sample: {

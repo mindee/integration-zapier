@@ -3,6 +3,9 @@ name: Test
 on:
   workflow_call:
 
+env:
+  MINDEE_API_KEY: ${{ secrets.MINDEE_API_KEY_SE_TESTS }}
+
 jobs:
   run-tests:
     name: Run Tests

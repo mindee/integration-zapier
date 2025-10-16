@@ -5,24 +5,31 @@
  */
 
 const defaults = require("./defaults.js");
+const { MINDEE_V1_BASE_URL } = require("../constants.js");
+
+/**
+ * Performs the enqueue operation.
+ * @param z Zapier SDK
+ * @param bundle Zapier bundle
+ * @returns A promise that resolves to the enqueue results, containing queue information.
+ */
+const perform = (z, bundle) => {
+  const promise = z.request({
+    url: `${MINDEE_V1_BASE_URL}/v1/products/mindee/bank_check/v1/predict`,
+    method: "POST",
+    body: {
+      "document": bundle.inputData.document
+    }
+  });
+  return promise.then((response) => JSON.parse(response.content));
+};
 
 module.exports = {
   operation: {
     inputFields: [
       defaults.documentInputField,
     ],
-    perform: (z, bundle) => {
-      const promise = z.request({
-        url: 'https://api.mindee.net/v1/products/mindee/bank_check/v1/predict',
-        method: 'POST',
-        body: {
-          'document': bundle.inputData.document
-        },
-        headers: defaults.postHeaders,
-      });
-
-      return promise.then((response) => JSON.parse(response.content));
-    },
+    perform: perform,
     sample: {
       "api_request": {
         "error": {},

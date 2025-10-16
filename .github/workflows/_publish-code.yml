@@ -7,9 +7,12 @@ on:
   workflow_call:
   workflow_dispatch:
 
+env:
+  ZAPIER_DEPLOY_KEY: ${{ secrets.ZAPIER_DEPLOY_KEY }}
+
 jobs:
   publish:
-    name: Publish release to NPM
+    name: Push release to Zapier
     runs-on: ubuntu-latest
 
     steps:
