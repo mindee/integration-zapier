@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.1
+- Hide rather than delete US Driving License
+- Hide Custom API
+
 ## 3.2.0
 - Update tests to make actual calls to the API
 - Add the Zap version to the user agent

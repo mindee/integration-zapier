@@ -89,9 +89,9 @@ module.exports = {
   key: 'Mindee_custom_api',
   noun: 'API Builder parsing',
   display: {
-    label: 'Mindee API Builder Parsing',
+    label: "Mindee API Builder Parsing (Deprecated)",
     description:
-      'Extract data from any custom document using the Mindee API Builder made API',
-    hidden: false
+      "Deprecated. Use doctTI (generated) instead.",
+    hidden: true
   },
 };

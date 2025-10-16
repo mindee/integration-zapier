@@ -1,6 +1,6 @@
 {
   "name": "mindee-receipt-parsing",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Parse your document using the Mindee API.",
   "main": "index.js",
   "scripts": {
