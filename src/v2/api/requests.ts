@@ -9,7 +9,9 @@ import FormData from "form-data";
  * @param jobId The ID of the job to poll.
  * @returns A promise that resolves to the response from the server.
  */
-export async function reqJobGet(z: ZObject, jobId: string): Promise<HttpResponse> {
+export async function reqJobGet(
+  z: ZObject, jobId: string
+): Promise<HttpResponse> {
   return await z.request({
     url: `${MINDEE_V2_BASE_URL}/v2/jobs/${jobId}`,
   });
@@ -21,7 +23,9 @@ export async function reqJobGet(z: ZObject, jobId: string): Promise<HttpResponse
  * @param inferenceId The ID of the inference to poll.
  * @returns A promise that resolves to the response from the server.
  */
-export async function reqInferenceGet(z: ZObject, inferenceId: string): Promise<HttpResponse> {
+export async function reqInferenceGet(
+  z: ZObject, inferenceId: string
+): Promise<HttpResponse> {
   return await z.request({
     url: `${MINDEE_V2_BASE_URL}/v2/inferences/${inferenceId}`,
   });
@@ -33,11 +37,36 @@ export async function reqInferenceGet(z: ZObject, inferenceId: string): Promise<
  * @param bundle The body of the request.
  * @returns A promise that resolves to the response from the server.
  */
-export async function reqInferencePost(z: ZObject, bundle: any): Promise<HttpResponse> {
+export async function reqInferencePost(
+  z: ZObject,
+  bundle: any,
+): Promise<HttpResponse> {
   return await z.request({
     method: "POST",
     url: `${MINDEE_V2_BASE_URL}/v2/inferences/enqueue`,
     body: setupEnqueueForm(bundle),
+  });
+}
+
+/**
+ * Get a list of available models.
+ * @param z Zapier SDK.
+ * @param name The name of the model to search for.
+ * @param page The page number to retrieve.
+ * @param perPage The number of models per page.
+ * @returns A promise that resolves to the response from the server.
+ */
+export async function reqSearchModelsGet(
+  z: ZObject,
+  name: string,
+  page: number,
+  perPage: number,
+): Promise<HttpResponse> {
+  return await z.request({
+    method: "GET",
+    url: `${MINDEE_V2_BASE_URL}/v2/search/models`,
+    // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
+    params: { name: name, page: page, per_page: perPage },
   });
 }
 
@@ -50,7 +79,7 @@ export function setupEnqueueForm(bundle: Bundle): FormData {
   const form = new FormData();
 
   form.append("model_id", bundle.inputData.modelId);
-  form.append("file", bundle.inputData.file);
+  form.append("file_base64", bundle.inputData.file);
 
   if (bundle.inputData.alias) {
     form.append("alias", bundle.inputData.alias);

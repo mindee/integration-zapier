@@ -1,7 +1,6 @@
 import {
-  type InputField,
-  type InputDataConstraint,
   type FieldChoices,
+  defineInputFields,
 } from "zapier-platform-core";
 
 const optionDefault = "default";
@@ -12,7 +11,7 @@ const optionChoices: FieldChoices = [
   { label: "Disabled", value: "false", sample:"false" },
 ];
 
-export const inferenceCreateFields: InputField<InputDataConstraint>[] = [
+export const inferenceCreateFields = defineInputFields([
   {
     key: "modelId",
     label: "Model ID",
@@ -71,4 +70,14 @@ export const inferenceCreateFields: InputField<InputDataConstraint>[] = [
     helpText:
       "Extract full document text as strings and fill the `rawText` attribute.",
   },
-];
+]);
+
+export const pollingFields = defineInputFields([
+  {
+    key: "maxPollingTimeOut",
+    required: true,
+    default: "180",
+    type: "number",
+    helpText: "Maximum polling timeout in seconds."
+  },
+]);

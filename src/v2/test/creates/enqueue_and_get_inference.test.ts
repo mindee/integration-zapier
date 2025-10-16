@@ -19,7 +19,7 @@ describe("creates.enqueue_and_get_inference", () => {
     };
 
     // @ts-expect-error TBD
-    const results = await appTester(App.creates["enqueue_and_get_inference"].operation.perform, bundle);
+    const results = await appTester(App.creates["v2_enqueue_and_get_inference"].operation.perform, bundle);
     expect(results).toBeDefined();
     // TODO: add more assertions
   }, 20000);

@@ -4,23 +4,17 @@ import {
   type CreatePerform,
   type InferInputData,
 } from "zapier-platform-core";
-import { reqInferencePost, pollForInference } from "../utils/mindeeApi.js";
-import completeInference from "../samples/inferenceComplete.json" with { type: "json" };
-import { inferenceCreateFields } from "./inputs.js";
+import { reqInferencePost, pollForInference } from "../api/requests.js";
+import completeInference from "../api/samples/inferenceComplete.json" with { type: "json" };
+import { inferenceCreateFields, pollingFields } from "../api/inputFields.js";
+import { inferenceOutputFields } from "../api/outputFields.js";
 
 
 /**
  * Defines the input fields for the enqueueAndGetInference operation.
  */
 const inputFields = defineInputFields(
-  inferenceCreateFields.concat(
-    [{
-      key: "maxPollingTimeOut",
-      required: true,
-      default: "180",
-      type: "number",
-      helpText: "Maximum polling timeout in seconds."
-    }])
+  [...inferenceCreateFields, ...pollingFields]
 );
 
 /**
@@ -32,14 +26,14 @@ const inputFields = defineInputFields(
 const perform = (async (z, bundle) => {
   const jobId = await reqInferencePost(z, bundle)
     .then(response => response.data.job.id);
-  const response = await pollForInference(z, jobId);
+  const response = await pollForInference(z, jobId, bundle.inputData.maxPollingTimeOut);
   return response.data;
 }) satisfies CreatePerform<InferInputData<typeof inputFields>>;
 
 export default defineCreate({
   // see here for a full list of available properties:
   // https://github.com/zapier/zapier-platform/blob/main/packages/schema/docs/build/schema.md#createschema
-  key: "enqueue_and_get_inference",
+  key: "v2_enqueue_and_get_inference",
   noun: "Send File and Get Inference",
 
   display: {
@@ -52,19 +46,6 @@ export default defineCreate({
     perform: perform,
     inputFields: inputFields,
     sample: completeInference,
-    outputFields: [
-      { key: "inference__id", label: "Inference ID" },
-      { key: "inference__model__id", label: "Model ID" },
-      { key: "inference__file__name", label: "File Name" },
-      { key: "inference__file__alias", label: "File Alias" },
-      { key: "inference__file__page_count", label: "File Page Count", type: "integer" },
-      { key: "inference__file__mime_type", label: "File MIME Type" },
-      { key: "inference__result__fields", label: "Result Fields" },
-      { key: "inference__result__raw_text", label: "Result Raw Text" },
-      { key: "inference__active_options__raw_text", label: "Option: Raw Text", type: "boolean" },
-      { key: "inference__active_options__rag", label: "Option: RAG", type: "boolean" },
-      { key: "inference__active_options__polygon", label: "Option: Polygon", type: "boolean" },
-      { key: "inference__active_options__confidence", label: "Option: Confidence", type: "boolean" },
-    ],
+    outputFields: inferenceOutputFields,
   },
 });

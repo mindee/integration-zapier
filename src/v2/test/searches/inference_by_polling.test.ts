@@ -20,7 +20,7 @@ describe("searches.inference", () => {
 
     try {
       // @ts-expect-error TBD
-      await appTester(App.searches["inference_by_polling"].operation.perform, bundle);
+      await appTester(App.searches["v2_inference_by_polling"].operation.perform, bundle);
       expect.fail("Expected the operation to throw an error for Non-existing job ID");
     } catch (error: any) {
       expect(error.message).toContain("404");

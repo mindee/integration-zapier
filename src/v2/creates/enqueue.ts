@@ -4,9 +4,10 @@ import {
   type CreatePerform,
   type InferInputData,
 } from "zapier-platform-core";
-import { reqInferencePost } from "../utils/mindeeApi.js";
-import jobSample from "../samples/jobProcessing.json" with { type: "json" };
-import { inferenceCreateFields } from "./inputs.js";
+import { reqInferencePost } from "../api/requests.js";
+import jobSample from "../api/samples/jobProcessing.json" with { type: "json" };
+import { inferenceCreateFields } from "../api/inputFields.js";
+import { jobOutputFields } from "../api/outputFields.js";
 
 /**
  * Defines the input fields for the enqueue operation.
@@ -28,40 +29,18 @@ const perform = (async (z, bundle) => {
  * Defines the enqueue operation.
  */
 export default defineCreate({
-  key: "enqueue",
+  key: "v2_enqueue",
   noun: "Enqueue",
-
   display: {
     label: "Enqueue a File",
     description: "Send a file and return the job. " +
       "You'll need to poll for the inference using the job ID.",
     hidden: false,
   },
-
   operation: {
     perform: perform,
     inputFields: inputFields,
     sample: jobSample,
-    outputFields: [
-      {
-        key: "job__id",
-        label: "Job ID",
-        type: "string"
-      },
-      {
-        key:
-          "job__model_id",
-        label: "Model ID",
-        type: "string"
-      },
-      { key: "job__filename", label: "Filename", type: "string" },
-      { key: "job__alias", label: "(Optional) Alias", type: "string" },
-      { key: "job__created_at", label: "Creation date", type: "datetime" },
-      { key: "job__status", label: "Queue status", type: "string" },
-      { key: "job__polling_url", label: "Polling URL", type: "string" },
-      { key: "job__result_url", label: "Result URL", type: "string" },
-      { key: "job__error", label: "Error" },
-      { key: "job__webhooks[]", label: "Webhooks" }
-    ],
+    outputFields: jobOutputFields,
   },
 });

@@ -2,9 +2,10 @@ import {
   defineTrigger,
   type PollingTriggerPerform,
 } from "zapier-platform-core";
-import { MINDEE_V2_BASE_URL } from "../../constants.js";
+import { reqSearchModelsGet } from "../api/requests.js";
 
 const PER_PAGE = 50;
+
 /**
  * Performs the trigger for getting models.
  * @param z Zapier SDK
@@ -16,28 +17,31 @@ const perform = (async (z, bundle) => {
   const pageIdx = Number(bundle.meta?.page || 0);
   const page = pageIdx + 1;
 
-  const res = await z.request({
-    method: "GET",
-    url: `${MINDEE_V2_BASE_URL}/v2/search/models`,
-    // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
-    params: { name: search, page, per_page: PER_PAGE },
-  });
+  const res = await reqSearchModelsGet(z, search, page, PER_PAGE);
 
-  const models = res.data?.models ?? [];
+  const models: Array<object> = res.data?.models ?? [];
   // This is so that the search field can grab [{ id, name }] for dynamic: "model.id.name"
-  return models.map((m: any) => ({ id: m.id, name: m.name || m.id }));
+  return models.map((model: any) => ({ id: model.id, name: model.name || model.id }));
 }) satisfies PollingTriggerPerform;
 
 /**
  * Defines the trigger for getting models.
  */
 export default defineTrigger({
-  key: "search_models",
+  key: "v2_search_models",
   noun: "Model",
-  display: { label: "List Models", description: "Internal", hidden: true },
+  display: {
+    label: "List Models",
+    description: "Internal",
+    hidden: true,
+  },
   operation: {
     perform,
     canPaginate: true,
-    sample: { id: "12356-0987-0987DEE", name: "My model 1" }, // Not 100% sure about this one
+    // Not 100% sure about this one
+    sample: {
+      id: "12356-0987-0987DEE",
+      name: "My model 1"
+    },
   },
 });

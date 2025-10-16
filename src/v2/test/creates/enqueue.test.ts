@@ -19,7 +19,7 @@ describe("creates.enqueue", () => {
     };
 
     // @ts-expect-error TBD
-    const results = await appTester(App.creates["enqueue"].operation.perform, bundle);
+    const results = await appTester(App.creates["v2_enqueue"].operation.perform, bundle);
     expect(results).toBeDefined();
     // TODO: add more assertions
   }, 6000);
