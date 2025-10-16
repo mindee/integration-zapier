@@ -1,12 +1,13 @@
+const { MINDEE_V1_BASE_URL } = require("../constants.js");
+
 module.exports = {
-  enqueueAndParse: async (z, inputDocument, apiOwner, apiName, apiVersion, headers, maxRetries = 60) => {
+  enqueueAndParse: async (z, inputDocument, apiOwner, apiName, apiVersion, maxRetries = 60) => {
     const enqueueResponse = await z.request({
-      url: `https://api.mindee.net/v1/products/${apiOwner}/${apiName}/v${apiVersion}/predict_async`,
-      method: 'POST',
+      url: `${MINDEE_V1_BASE_URL}/v1/products/${apiOwner}/${apiName}/v${apiVersion}/predict_async`,
+      method: "POST",
       body: {
-        'document': inputDocument
+        "document": inputDocument
       },
-      headers: headers,
     });
 
     const enqueueJson = JSON.parse(enqueueResponse.content);
@@ -18,10 +19,9 @@ module.exports = {
       while (retryCount < maxRetries) {
         await new Promise(resolve => setTimeout(resolve, 2000));
         parseQueuedResponse = await z.request({
-          url: `https://api.mindee.net/v1/products/${apiOwner}/${apiName}/v${apiVersion}/documents/queue/${jobId}`,
-          method: 'GET',
+          url: `${MINDEE_V1_BASE_URL}/v1/products/${apiOwner}/${apiName}/v${apiVersion}/documents/queue/${jobId}`,
+          method: "GET",
           redirect: "follow",
-          headers: headers,
         });
 
         retryCount++;
@@ -34,7 +34,7 @@ module.exports = {
     } else if (enqueueJson?.api_request?.error && Object.keys(enqueueJson.api_request.error).length > 0) {
       return Promise.reject(new Error(JSON.stringify(enqueueJson.api_request.error)));
     } else {
-      return Promise.reject(new Error(`Could not enqueue file properly.`));
+      return Promise.reject(new Error("Could not enqueue file properly."));
     }
   }
 }

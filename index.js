@@ -15,17 +15,17 @@ const mindeeGeneratedAPI = require("./creates/mindee_generated.js");
 const mindeeFinancialDocumentAPI = require("./creates/mindee_financial_document.js");
 const mindeeFrenchBankAccountDetails = require("./creates/mindee_fr_bank_account_details.js");
 const mindeeUSBankCheck = require("./creates/mindee_us_bank_check.js");
-const mindeeUSDrivingLicense = require("./creates/mindee_us_driving_license.js");
-const fs = require("fs");
+const mindeeDriverLicense = require("./creates/mindee_driver_license.js");
 const zapierPlatform = require("zapier-platform-core");
+const { appVersion } = require("./constants.js");
+const { addAuthHeader } = require("./middleware.js");
 
-
-const packageVersion = JSON.parse(fs.readFileSync('package.json', 'utf8'))['version'];
 
 module.exports = {
-  version: packageVersion,
+  version: appVersion,
   platformVersion: zapierPlatform.version,
   authentication: authentication,
+  beforeRequest: [addAuthHeader],
   creates: {
     [mindeeInvoice.key]: mindeeInvoice,
     [mindeeReceipt.key]: mindeeReceipt,
@@ -36,6 +36,6 @@ module.exports = {
     [mindeeFinancialDocumentAPI.key]: mindeeFinancialDocumentAPI,
     [mindeeFrenchBankAccountDetails.key]: mindeeFrenchBankAccountDetails,
     [mindeeUSBankCheck.key]: mindeeUSBankCheck,
-    [mindeeUSDrivingLicense.key]: mindeeUSDrivingLicense,
+    [mindeeDriverLicense.key]: mindeeDriverLicense,
   }
 };

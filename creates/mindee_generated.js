@@ -36,7 +36,7 @@ module.exports = {
         .split('/');
       const apiOwner = splitUrl[0];
       const apiName = splitUrl[1];
-      const response = enqueueAndParse(z, bundle.inputData.document, apiOwner, apiName, apiVersion, defaults.postHeaders, 60);
+      const response = enqueueAndParse(z, bundle.inputData.document, apiOwner, apiName, apiVersion, 60);
       return response.then((res) => JSON.parse(res.content));
     },
     sample: {
