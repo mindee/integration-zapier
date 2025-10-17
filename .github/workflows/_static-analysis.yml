@@ -1,15 +1,9 @@
-name: Publish Code
-
+name: lint.yml
 on:
   workflow_call:
-  workflow_dispatch:
-
-env:
-  ZAPIER_DEPLOY_KEY: ${{ secrets.ZAPIER_DEPLOY_KEY }}
-
 jobs:
-  publish:
-    name: Push release to Zapier
+  static-check:
+    name: Run Static Analysis
     runs-on: ubuntu-latest
 
     steps:
@@ -25,5 +19,11 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
-      - name: Publish
-        run: npm run zapier push
+      - name: Test lint
+        run: npm run lint
+
+      - name: Install NPM License Checker
+        run: npm install -g license-checker
+
+      - name: Check licences, no GPL or APGL allowed
+        run: license-checker | grep -P -B1 '(?<=[A\W])GPL' && exit 1 || exit 0
