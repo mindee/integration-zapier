@@ -8,19 +8,36 @@ import fs from "node:fs";
 const appTester = zapier.createAppTester(App);
 zapier.tools.env.inject();
 
+const modelId = process.env["MINDEE_V2_FINDOC_MODEL_ID"];
+const bundle: any = {
+  authData: {
+    apiKey: process.env["MINDEE_V2_API_KEY"],
+  },
+  inputData: {
+    file: fs.readFileSync(blankPdfPath).toString("base64"),
+    modelId: modelId,
+    alias: "zapier-test-enqueue-get-inference",
+  }
+};
+
 describe("creates.enqueue_and_get_inference", () => {
   it("should run", async () => {
-    const bundle = {
-      authData: { apiKey: process.env["MINDEE_V2_API_KEY"] },
-      inputData: {
-        file: fs.createReadStream(blankPdfPath),
-        modelId: process.env["MINDEE_V2_FINDOC_MODEL_ID"],
-      }
-    };
+    delete bundle.inputData["polygon"];
+    delete bundle.inputData["confidence"];
 
     // @ts-expect-error TBD
-    const results = await appTester(App.creates["v2_enqueue_and_get_inference"].operation.perform, bundle);
-    expect(results).toBeDefined();
-    // TODO: add more assertions
+    const results: any = await appTester(App.creates["v2_enqueue_and_get_inference"].operation.perform, bundle);
+    expect(results).toBeInstanceOf(Object);
+    expect(results.inference).toBeInstanceOf(Object);
+    expect(results.inference.model.id).toEqual(modelId);
+
+    expect(results.inference.active_options).toBeInstanceOf(Object);
+    expect(results.inference.active_options.rag).toEqual(false);
+
+    expect(results.inference.file).toBeInstanceOf(Object);
+    expect(results.inference.file.mime_type).toEqual("application/pdf");
+
+    expect(results.inference.result).toBeInstanceOf(Object);
+    expect(results.inference.result.fields).toBeInstanceOf(Object);
   }, 20000);
 });

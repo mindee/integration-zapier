@@ -79,6 +79,7 @@ export function setupEnqueueForm(bundle: Bundle): FormData {
   const form = new FormData();
 
   form.append("model_id", bundle.inputData.modelId);
+  // Zapier sends the file as a base64 string, so we cannot use the 'file' field.
   form.append("file_base64", bundle.inputData.file);
 
   if (bundle.inputData.alias) {

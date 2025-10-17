@@ -12,7 +12,9 @@ zapier.tools.env.inject();
 describe("searches.inference", () => {
   it("Non-existing inference ID – must raise 4xx", async () => {
     const bundle = {
-      authData: { apiKey: process.env["MINDEE_V2_API_KEY"] },
+      authData: {
+        apiKey: process.env["MINDEE_V2_API_KEY"],
+      },
       inputData: {
         inferenceId: "fc405e37-4ba4-4d03-aeba-533a8d1f0f21",
       }

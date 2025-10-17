@@ -8,19 +8,30 @@ import fs from "node:fs";
 const appTester = zapier.createAppTester(App);
 zapier.tools.env.inject();
 
+const modelId = process.env["MINDEE_V2_FINDOC_MODEL_ID"];
+const bundle: any = {
+  authData: {
+    apiKey: process.env["MINDEE_V2_API_KEY"],
+  },
+  inputData: {
+    file: fs.readFileSync(blankPdfPath).toString("base64"),
+    modelId: modelId,
+    alias: "zapier-test-enqueue",
+  }
+};
+
 describe("creates.enqueue", () => {
-  it("should run", async () => {
-    const bundle = {
-      authData: { apiKey: process.env["MINDEE_V2_API_KEY"] },
-      inputData: {
-        file: fs.createReadStream(blankPdfPath),
-        modelId: process.env["MINDEE_V2_FINDOC_MODEL_ID"],
-      }
-    };
+  it("should run with default options", async () => {
+    delete bundle.inputData["polygon"];
+    delete bundle.inputData["confidence"];
 
     // @ts-expect-error TBD
-    const results = await appTester(App.creates["v2_enqueue"].operation.perform, bundle);
-    expect(results).toBeDefined();
-    // TODO: add more assertions
+    const response: any = await appTester(App.creates["v2_enqueue"].operation.perform, bundle);
+    expect(response).toBeInstanceOf(Object);
+    expect(response.job).toBeInstanceOf(Object);
+    expect(response.job.status).toEqual("Processing");
+    expect(response.job.model_id).toEqual(modelId);
+    expect(response.job.alias).toEqual("zapier-test-enqueue");
+    expect(response.job.error).toBeNull;
   }, 6000);
 });
