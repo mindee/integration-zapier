@@ -103,8 +103,3 @@ And thats all there is to it.  We've build a sample app that an airline could us
 > Clearly this is a sample app - as this sort of data does require more security than storing in a Google account.  But as a proof of concept, it shows the process that one could follow.  
 
 there are thousands of applications already set up in Zapier - and we're excited to see what sorts of apps can be built with Mindee.
-
-&nbsp;
-&nbsp;
-**Questions?**
-<img alt="Slack Logo Icon" style="display:inline!important" src="https://files.readme.io/5b83947-Slack.png" width="20" height="20">&nbsp;&nbsp;[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw)

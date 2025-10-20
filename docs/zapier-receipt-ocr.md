@@ -118,8 +118,3 @@ The final step before activating our zap is to run the final test, and this mess
 
 In this demo - we've sent a receipt to a Discord channel.
 Zapier retrieves the URL of the attachment, and sends it to Mindee's Receipt API to parse the data. When the extraction is complete, a formatted message containing the extracted data, and a picture of the receipt is posted to a 2nd Discord channel.
-
-&nbsp;
-&nbsp;
-**Questions?**
-<img alt="Slack Logo Icon" style="display:inline!important" src="https://files.readme.io/5b83947-Slack.png" width="20" height="20">&nbsp;&nbsp;[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw)

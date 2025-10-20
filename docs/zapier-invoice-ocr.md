@@ -168,8 +168,3 @@ Do note that even with the +invoice, your email will go into my inbox, and the d
 With just a few minutes of work (and with zero coding), we have build a fully functional invoice processing system - invoices sent as email attachments are automatically identified, extracted, and the results are placed in a Google Sheet.
 
 We're very excited about the possible opportunities that no-coding options can bring to the Mindee Community!
-
-&nbsp;
-&nbsp;
-**Questions?**
-<img alt="Slack Logo Icon" style="display:inline!important" src="https://files.readme.io/5b83947-Slack.png" width="20" height="20">&nbsp;&nbsp;[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw)

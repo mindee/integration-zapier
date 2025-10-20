@@ -18,6 +18,7 @@ module.exports = {
     {
       computed: false,
       key: 'connection_name',
+      label: 'Connection Name',
       required: true,
       type: 'string',
       helpText:
@@ -26,12 +27,12 @@ module.exports = {
     {
       computed: false,
       key: 'api_key',
+      label: 'API Key',
       required: true,
       type: 'password',
       helpText:
-        'Insert your API key in order to make calls to the Mindee platform. You can create your API key as mentioned here: https://developers.mindee.com/docs/create-api-key#creating-your-api-key',
+        'Insert your API key in order to make calls to the Mindee platform. [More Information](https://docs.mindee.com/v1/get-started/create-api-key)',
     },
-    
   ],
   connectionLabel: '{{bundle.authData.connection_name}}',
   customConfig: {},

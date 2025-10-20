@@ -1,6 +1,6 @@
 {
-  "name": "mindee-receipt-parsing",
-  "version": "3.2.1",
+  "name": "mindee-ocr",
+  "version": "3.2.2",
   "description": "Parse your document using the Mindee API.",
   "main": "index.js",
   "scripts": {
