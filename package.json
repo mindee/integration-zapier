@@ -1,11 +1,14 @@
 {
   "name": "mindee-ocr",
-  "version": "3.2.2",
+  "version": "4.0.0",
   "description": "Parse your document using the Mindee API.",
-  "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive -t 10000",
-    "zapier": "zapier"
+    "clean": "rimraf ./dist ./build",
+    "build": "npm run clean && tsc",
+    "test": "npm run build && vitest --run",
+    "zapier": "npm run build && zapier",
+    "lint": "eslint  './src/**/*.ts' --report-unused-disable-directives && echo 'Your .ts files look good.'",
+    "lint-fix": "eslint './src/**/*.ts' --fix"
   },
   "engines": {
     "node": "^18"
@@ -15,14 +18,16 @@
     "zapier-platform-core": "17.8.0"
   },
   "devDependencies": {
-    "chai": "~6.2.0",
-    "mocha": "~11.7.4"
+    "@typescript-eslint/eslint-plugin": "~8.46",
+    "vitest": "~2.1.9",
+    "mocha": "~11.7.4",
+    "ts-node": "~10.9.2",
+    "typescript": "~5.9.3"
   },
   "overrides": {
     "@types/node": "^18"
   },
   "private": true,
-  "zapier": {
-    "convertedByCLIVersion": "15.5.3"
-  }
+  "exports": "./dist/index.js",
+  "type": "module"
 }
