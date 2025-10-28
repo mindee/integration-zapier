@@ -1,6 +1,6 @@
 {
   "name": "mindee-ocr",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Parse your document using the Mindee API.",
   "scripts": {
     "clean": "rimraf ./dist ./build",
@@ -14,8 +14,8 @@
     "node": "^18"
   },
   "dependencies": {
-    "zapier-platform-cli": "17.8.0",
-    "zapier-platform-core": "17.8.0"
+    "zapier-platform-cli": "17.9.0",
+    "zapier-platform-core": "17.9.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "~8.46",
