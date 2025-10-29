@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.0.2 - 2025-10-29
+- Update Zapier platform to 17.9.1
+- Add the Zapier version to the user agent string
+
 ## v4.0.1 - 2025-10-28
 - Update Zapier platform to 17.9.0
 

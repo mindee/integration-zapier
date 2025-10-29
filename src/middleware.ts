@@ -1,4 +1,4 @@
-import { appVersion } from "./constants.js";
+import { appVersion, zapierVersion } from "./constants.js";
 import type { BeforeRequestMiddleware, Bundle, ZObject } from "zapier-platform-core";
 
 export const addAuthHeader: BeforeRequestMiddleware = (request, z: ZObject, bundle: Bundle) => {
@@ -9,7 +9,7 @@ export const addAuthHeader: BeforeRequestMiddleware = (request, z: ZObject, bund
   }
 
   // must be lowercase to override the default user-agent
-  request.headers["user-agent"] = `mindee-api-zapier@v${appVersion}`;
+  request.headers["user-agent"] = `mindee-api-zapier@v${appVersion} zapier-v${zapierVersion}`;
 
   return request;
 };
