@@ -6,7 +6,7 @@
     "clean": "rimraf ./dist ./build",
     "build": "npm run clean && tsc",
     "test": "npm run build && vitest --run",
-    "zapier": "npm run build && zapier",
+    "zapier": "npm run build && zapier-platform",
     "lint": "eslint  './src/**/*.ts' --report-unused-disable-directives && echo 'Your .ts files look good.'",
     "lint-fix": "eslint './src/**/*.ts' --fix"
   },
