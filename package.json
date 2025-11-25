@@ -1,6 +1,6 @@
 {
   "name": "mindee-ocr",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Parse your document using the Mindee API.",
   "scripts": {
     "clean": "rimraf ./dist ./build",
@@ -11,21 +11,22 @@
     "lint-fix": "eslint './src/**/*.ts' --fix"
   },
   "engines": {
-    "node": "^18"
+    "node": "^22"
   },
   "dependencies": {
-    "zapier-platform-cli": "17.9.1",
-    "zapier-platform-core": "17.9.1"
+    "zapier-platform-cli": "18.0.1",
+    "zapier-platform-core": "18.0.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "~8.46",
+    "@typescript-eslint/eslint-plugin": "~8.48",
     "vitest": "~2.1.9",
-    "mocha": "~11.7.4",
+    "mocha": "~11.7.5",
+    "rimraf": "~6.1",
     "ts-node": "~10.9.2",
     "typescript": "~5.9.3"
   },
   "overrides": {
-    "@types/node": "^18"
+    "@types/node": "^22"
   },
   "private": true,
   "exports": "./dist/index.js",
