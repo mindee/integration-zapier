@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.0.3 - 2025-11-25
+- Update Zapier platform to 18.0.1
+- Run tests on node.js 22
+
 ## v4.0.2 - 2025-10-29
 - Update Zapier platform to 17.9.1
 - Add the Zapier version to the user agent string

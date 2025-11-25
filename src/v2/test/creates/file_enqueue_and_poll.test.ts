@@ -38,7 +38,7 @@ describe("creates.enqueue", () => {
       }
     };
     await assertInferenceResponse(bundle);
-  }, 6000);
+  }, 15000);
 
   it("should send a file stream", async () => {
     const bundle: any = {
@@ -51,7 +51,7 @@ describe("creates.enqueue", () => {
       }
     };
     await assertInferenceResponse(bundle);
-  }, 6000);
+  }, 15000);
 
   it("should send a URL", async () => {
     const bundle: any = {
@@ -59,11 +59,10 @@ describe("creates.enqueue", () => {
         apiKey: process.env["MINDEE_V2_API_KEY"],
       },
       inputData: {
-        file: "https://raw.githubusercontent.com/mindee/client-lib-test-data/refs/heads/main/" +
-          "file_types/pdf/blank_1.pdf",
+        file: "https://cdn.jsdelivr.net/gh/mindee/client-lib-test-data@v0.0.0/file_types/pdf/blank_1.pdf",
         modelId: modelId,
       }
     };
     await assertInferenceResponse(bundle);
-  }, 6000);
+  }, 15000);
 });
