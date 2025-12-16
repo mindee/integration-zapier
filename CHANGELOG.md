@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.0.4 - 2025-12-16
+- Update Zapier platform to 18.0.5
+- Update vitest to 3.2
+
 ## v4.0.3 - 2025-11-25
 - Update Zapier platform to 18.0.1
 - Run tests on node.js 22
