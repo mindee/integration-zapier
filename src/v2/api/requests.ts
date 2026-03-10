@@ -13,7 +13,7 @@ export async function reqJobGet(
   z: ZObject, jobId: string
 ): Promise<HttpResponse> {
   return await z.request({
-    url: `${MINDEE_V2_BASE_URL}/v2/jobs/${jobId}`,
+    url: `${MINDEE_V2_BASE_URL}/v2/jobs/${jobId}?redirect=true`,
   });
 }
 
@@ -23,14 +23,14 @@ export async function reqJobGet(
  * @param bundle The body of the request.
  * @returns A promise that resolves to the response from the server.
  */
-export async function reqInferencePost(
+export async function reqExtractionPost(
   z: ZObject,
   bundle: any,
 ): Promise<HttpResponse> {
   return await z.request({
     method: "POST",
-    url: `${MINDEE_V2_BASE_URL}/v2/inferences/enqueue`,
-    body: setupEnqueueForm(bundle),
+    url: `${MINDEE_V2_BASE_URL}/v2/products/extraction/enqueue`,
+    body: setupExtractionParamsForm(bundle),
   });
 }
 
@@ -61,7 +61,7 @@ export async function reqSearchModelsGet(
  * @param bundle Zapier bundle
  * @returns The body for the enqueue & enqueueAndGetInference operation.
  */
-export function setupEnqueueForm(bundle: Bundle): FormData {
+export function setupExtractionParamsForm(bundle: Bundle): FormData {
   const form = new FormData();
 
   form.append("model_id", bundle.inputData.modelId);
