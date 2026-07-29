@@ -17,7 +17,7 @@ const bundle = {
 
 describe("triggers.search_models", () => {
   it("should filter", async () => {
-    bundle.meta.withSearch = "financial";
+    bundle.meta.withSearch = "fin";
     // @ts-expect-error TBD
     const results: Array = await appTester(App.triggers["v2_search_models"].operation.perform, bundle);
     expect(results).toBeInstanceOf(Array);

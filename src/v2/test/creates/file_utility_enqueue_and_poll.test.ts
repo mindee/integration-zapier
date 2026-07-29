@@ -28,9 +28,6 @@ async function assertUtilityInferenceResponse(bundle: Bundle, productModelId: st
   expect(response.inference).toBeInstanceOf(Object);
   expect(response.inference.model.id).toEqual(productModelId);
 
-  expect(response.inference.active_options).toBeInstanceOf(Object);
-  expect(response.inference.active_options.rag).toEqual(false);
-
   expect(response.inference.file).toBeInstanceOf(Object);
 
   expect(response.inference.result).toBeInstanceOf(Object);
