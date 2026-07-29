@@ -14,7 +14,8 @@ export default defineApp({
   beforeRequest: [...befores],
   afterResponse: [...afters],
   creates: {
-    [v2.createEnqueueAndGetInference.key]: v2.createEnqueueAndGetInference,
+    [v2.createExtractionEnqueueAndGetInference.key]: v2.createExtractionEnqueueAndGetInference,
+    [v2.createUtilityEnqueueAndGetInference.key]: v2.createUtilityEnqueueAndGetInference,
   },
   triggers: {
     [v2.searchModels.key]: v2.searchModels,
