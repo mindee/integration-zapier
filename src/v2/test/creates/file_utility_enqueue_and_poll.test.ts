@@ -8,11 +8,17 @@ import fs from "node:fs";
 const appTester = zapier.createAppTester(App);
 zapier.tools.env.inject();
 
-const cropModelId = process.env["MINDEE_V2_CROP_MODEL_ID"] ?? "COULDNT_SET_MODEL_ID";
-const splitModelId = process.env["MINDEE_V2_SPLIT_MODEL_ID"] ?? "COULDNT_SET_MODEL_ID";
-const ocrModelId = process.env["MINDEE_V2_OCR_MODEL_ID"] ?? "COULDNT_SET_MODEL_ID";
-const classificationModelId = process.env["MINDEE_V2_CLASSIFICATION_MODEL_ID"] ?? "COULDNT_SET_MODEL_ID";
-const cropExtractionModelId = process.env["MINDEE_V2_CROP_EXTRACTION_MODEL_ID"] ?? "COULDNT_SET_MODEL_ID";
+
+function requireEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) throw new Error(`Missing required env var: ${name}`);
+  return value;
+}
+const cropModelId = requireEnv("MINDEE_V2_CROP_MODEL_ID");
+const splitModelId = requireEnv("MINDEE_V2_SPLIT_MODEL_ID");
+const ocrModelId = requireEnv("MINDEE_V2_OCR_MODEL_ID");
+const classificationModelId = requireEnv("MINDEE_V2_CLASSIFICATION_MODEL_ID");
+const cropExtractionModelId = requireEnv("MINDEE_V2_CROP_EXTRACTION_MODEL_ID");
 
 async function assertUtilityInferenceResponse(bundle: Bundle, productModelId: string) {
   // @ts-expect-error TBD
@@ -39,8 +45,8 @@ async function assertUtilityInferenceResponse(bundle: Bundle, productModelId: st
   ).toBe(true);
 }
 
-describe("creates.enqueue", () => {
-  describe("creates.enqueue", () => {
+describe("utility", () => {
+  describe("common utilities", () => {
     const utilities = [
       { name: "crop", utilityType: "crop", modelId: cropModelId },
       { name: "split", utilityType: "split", modelId: splitModelId },
