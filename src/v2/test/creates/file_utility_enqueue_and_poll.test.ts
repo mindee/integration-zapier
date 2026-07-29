@@ -75,7 +75,7 @@ describe("utility", () => {
           apiKey: process.env["MINDEE_V2_API_KEY"],
         },
         inputData: {
-          file: fs.createReadStream(blankPdfPath),
+          file: "https://cdn.jsdelivr.net/gh/mindee/client-lib-test-data@0.0.0/v2/products/financial_document/default_sample.jpg",
           modelId: cropExtractionModelId,
           utilityType: "crop"
         }
