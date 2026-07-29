@@ -1,7 +1,4 @@
-import {
-  type FieldChoices,
-  defineInputFields,
-} from "zapier-platform-core";
+import { defineInputFields, type FieldChoices } from "zapier-platform-core";
 
 const optionDefault = "default";
 
@@ -11,12 +8,12 @@ const optionChoices: FieldChoices = [
   { label: "Disabled", value: "false", sample:"false" },
 ];
 
-export const inferenceCreateFields = defineInputFields([
+const baseFields = [
   {
     key: "modelId",
     label: "Model to Use",
     required: true,
-    type: "string",
+    type: "string" as const,
     dynamic: "v2_search_models.id.name",
     helpText: "The model to use.",
   },
@@ -24,9 +21,30 @@ export const inferenceCreateFields = defineInputFields([
     key: "file",
     label: "File to Send",
     required: true,
-    type: "file",
+    type: "file" as const,
     helpText: "The file to analyze.",
   },
+] as const;
+
+export const utilityCreateFields = defineInputFields([
+  ...baseFields,
+  {
+    key: "utilityType",
+    label: "Utility Operation",
+    required: true,
+    type: "string" as const,
+    choices: [
+      { label: "Classify", value: "classify", sample: "classify" },
+      { label: "Crop", value: "crop", sample: "crop" },
+      { label: "Split", value: "split", sample: "split" },
+      { label: "Text Extraction (OCR)", value: "ocr", sample: "ocr" },
+    ],
+    helpText: "Select the utility operation you want to perform.",
+  }]
+);
+
+export const inferenceCreateFields = defineInputFields([
+  ...baseFields,
   {
     key: "rawText",
     label: "Enable Raw Text (Full OCR)",

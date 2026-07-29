@@ -18,7 +18,7 @@ const inputFields = defineInputFields(
 );
 
 /**
- * Performs the enqueueAndGetInference operation.
+ * Performs the enqueueAndGetInference operation on an extraction model.
  * @param z Zapier SDK
  * @param bundle Zapier bundle
  * @returns A promise that resolves to the enqueueAndGetInference results, containing the result.
@@ -33,7 +33,7 @@ const perform = (async (z, bundle) => {
 export default defineCreate({
   // see here for a full list of available properties:
   // https://github.com/zapier/zapier-platform/blob/main/packages/schema/docs/build/schema.md#createschema
-  key: "v2_file_enqueue_and_poll",
+  key: "v2_extraction_file_enqueue_and_poll",
   noun: "Data Extraction Request",
   display: {
     label: "Document Data Extraction",
