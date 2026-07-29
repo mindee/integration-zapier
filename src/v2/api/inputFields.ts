@@ -34,7 +34,7 @@ export const utilityCreateFields = defineInputFields([
     required: true,
     type: "string" as const,
     choices: [
-      { label: "Classify", value: "classify", sample: "classify" },
+      { label: "Classify", value: "classify", sample: "classification" },
       { label: "Crop", value: "crop", sample: "crop" },
       { label: "Split", value: "split", sample: "split" },
       { label: "Text Extraction (OCR)", value: "ocr", sample: "ocr" },
