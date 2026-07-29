@@ -7,6 +7,7 @@ import fs from "node:fs";
 
 const appTester = zapier.createAppTester(App);
 zapier.tools.env.inject();
+const rootRemote = "https://cdn.jsdelivr.net/gh/mindee/client-lib-test-data@0.0.0/";
 
 
 function requireEnv(name: string): string {
@@ -75,7 +76,7 @@ describe("utility", () => {
           apiKey: process.env["MINDEE_V2_API_KEY"],
         },
         inputData: {
-          file: "https://cdn.jsdelivr.net/gh/mindee/client-lib-test-data@0.0.0/v2/products/financial_document/default_sample.jpg",
+          file: `${rootRemote}v2/products/financial_document/default_sample.jpg`,
           modelId: cropExtractionModelId,
           utilityType: "crop"
         }
