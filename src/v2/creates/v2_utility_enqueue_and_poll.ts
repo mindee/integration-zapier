@@ -4,7 +4,7 @@ import {
   type CreatePerform,
   type InferInputData,
 } from "zapier-platform-core";
-import { reqUtilityPost, pollForInference, parseModelSelection } from "../api/requests.js";
+import { reqUtilityPost, pollForInference } from "../api/requests.js";
 import completeInference from "../api/samples/inferenceComplete.json" with { type: "json" };
 import { utilityCreateFields, pollingFields } from "../api/inputFields.js";
 import { utilityOutputFields } from "../api/outputFields.js";
@@ -24,8 +24,7 @@ const inputFields = defineInputFields(
  * @returns A promise that resolves to the enqueueAndGetInference results, containing the result.
  */
 const perform = (async (z, bundle) => {
-  const parsedModelSelection = parseModelSelection(bundle.inputData.modelId as string);
-  const selectedUtility = parsedModelSelection.utilityType || (bundle.inputData as any).utilityType;
+  const selectedUtility = bundle.inputData.modelId as string;
 
   if (!selectedUtility) {
     throw new Error(
