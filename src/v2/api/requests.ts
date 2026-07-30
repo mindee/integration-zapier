@@ -4,6 +4,23 @@ import { setTimeout } from "node:timers/promises";
 import FormData from "form-data";
 
 export type UtilityType = "classification" | "crop" | "split" | "ocr";
+const utilityTypes: Set<string> = new Set(["classification", "crop", "split", "ocr"]);
+const modelSelectionSeparator = "::";
+
+/**
+ * Parse a model selection value coming from the dynamic dropdown.
+ * Supports legacy values where only model ID is present.
+ */
+export function parseModelSelection(selection: string): { modelId: string, utilityType?: UtilityType } {
+  const [modelId = "", rawProduct = ""] = selection.split(modelSelectionSeparator);
+  const product = (rawProduct || "").toLowerCase();
+
+  if (utilityTypes.has(product)) {
+    return { modelId, utilityType: product as UtilityType };
+  }
+
+  return { modelId };
+}
 
 /**
  * Get the status of an inference that was previously enqueued.
@@ -102,7 +119,8 @@ export async function reqSearchModelsGet(
 function setupBaseParamsForm(bundle: Bundle): FormData {
   const form = new FormData();
 
-  form.append("model_id", bundle.inputData.modelId as string);
+  const selectedModel = parseModelSelection(bundle.inputData.modelId as string);
+  form.append("model_id", selectedModel.modelId);
 
   const fileData: any = bundle.inputData.file;
 

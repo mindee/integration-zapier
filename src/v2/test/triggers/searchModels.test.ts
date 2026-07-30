@@ -27,7 +27,6 @@ describe("triggers.search_models", () => {
 
       expect(results).toBeInstanceOf(Array);
       expect(results.length).toBeGreaterThanOrEqual(1);
-      console.log(results);
       const hasUtilityNamedModel = results.some((model: any) => (
         model.model_type || "").toLowerCase() === utility
       );

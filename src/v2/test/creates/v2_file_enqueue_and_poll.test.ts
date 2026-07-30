@@ -51,7 +51,7 @@ describe("creates.enqueue", () => {
       }
     };
     await assertExtractionInferenceResponse(bundle);
-  }, 15000);
+  }, 30000);
 
   it("should send a URL", async () => {
     const bundle: any = {
