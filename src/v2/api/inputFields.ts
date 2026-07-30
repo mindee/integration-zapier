@@ -4,47 +4,71 @@ const optionDefault = "default";
 
 const optionChoices: FieldChoices = [
   { label: "Use Model Default", value: optionDefault, sample: "default" },
-  { label: "Enabled", value: "true", sample:"true" },
-  { label: "Disabled", value: "false", sample:"false" },
+  { label: "Enabled", value: "true", sample: "true" },
+  { label: "Disabled", value: "false", sample: "false" },
 ];
 
-const baseFields = [
-  {
-    key: "modelId",
-    label: "Model to Use",
-    required: true,
-    type: "string" as const,
-    dynamic: "v2_search_models.id.name",
-    helpText: "The model to use.",
+const modelSearchTriggers = {
+  extraction: "v2_search_extraction_models",
+  utilities: {
+    base: "v2_search_models",
+    crop: "v2_search_crop_models",
+    split: "v2_search_split_models",
+    ocr: "v2_search_ocr_models",
+    classification: "v2_search_classification_models",
   },
-  {
-    key: "file",
-    label: "File to Send",
-    required: true,
-    type: "file" as const,
-    helpText: "The file to analyze.",
-  },
-] as const;
+} as const;
+
+function createBaseFields<const T extends string>(searchTriggerKey: T) {
+  return [
+    {
+      key: "modelId",
+      label: "Model to Use",
+      required: true,
+      type: "string" as const,
+      dynamic: `${searchTriggerKey}.id.name` as const,
+      helpText: "The model to use.",
+    },
+    {
+      key: "file",
+      label: "File to Send",
+      required: true,
+      type: "file" as const,
+      helpText: "The file to analyze.",
+    },
+  ] as const;
+}
+
+const extractionBaseFields = createBaseFields(modelSearchTriggers.extraction);
+
+const utilitiesBaseFields = createBaseFields(modelSearchTriggers.utilities.base);
+const utilityCropBaseFields = createBaseFields(modelSearchTriggers.utilities.crop);
+const utilitySplitBaseFields = createBaseFields(modelSearchTriggers.utilities.split);
+const utilityOcrBaseFields = createBaseFields(modelSearchTriggers.utilities.ocr);
+const utilityClassificationBaseFields = createBaseFields(modelSearchTriggers.utilities.classification);
 
 export const utilityCreateFields = defineInputFields([
-  ...baseFields,
-  {
-    key: "utilityType",
-    label: "Utility Operation",
-    required: true,
-    type: "string" as const,
-    choices: [
-      { label: "Classify", value: "classification", sample: "classification" },
-      { label: "Crop", value: "crop", sample: "crop" },
-      { label: "Split", value: "split", sample: "split" },
-      { label: "Text Extraction (OCR)", value: "ocr", sample: "ocr" },
-    ],
-    helpText: "Select the utility operation you want to perform.",
-  }]
-);
+  ...utilitiesBaseFields,
+]);
+
+export const utilityCropCreateFields = defineInputFields([
+  ...utilityCropBaseFields,
+]);
+
+export const utilitySplitCreateFields = defineInputFields([
+  ...utilitySplitBaseFields,
+]);
+
+export const utilityClassificationCreateFields = defineInputFields([
+  ...utilityClassificationBaseFields,
+]);
+
+export const utilityOcrCreateFields = defineInputFields([
+  ...utilityOcrBaseFields,
+]);
 
 export const inferenceCreateFields = defineInputFields([
-  ...baseFields,
+  ...extractionBaseFields,
   {
     key: "rawText",
     label: "Enable Raw Text (Full OCR)",

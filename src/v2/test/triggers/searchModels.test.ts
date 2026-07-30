@@ -16,6 +16,22 @@ const bundle = {
 };
 
 describe("triggers.search_models", () => {
+  it("should return at least one exact utility model for each utility type", async () => {
+    const utilities = ["crop", "split", "ocr", "classification"];
+
+    for (const utility of utilities) {
+      bundle.meta.withSearch = utility;
+      bundle.meta.page = 0;
+      // @ts-expect-error TBD
+      const results: Array = await appTester(App.triggers["v2_search_models"].operation.perform, bundle);
+
+      expect(results).toBeInstanceOf(Array);
+      expect(results.length).toBeGreaterThanOrEqual(1);
+      const hasUtilityNamedModel = results.some((model: any) => (model.name || "").toLowerCase() === utility);
+      expect(hasUtilityNamedModel).toBe(true);
+    }
+  });
+
   it("should filter", async () => {
     bundle.meta.withSearch = "fin";
     // @ts-expect-error TBD

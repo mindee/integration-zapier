@@ -3,6 +3,32 @@ import { MINDEE_V2_BASE_URL } from "../../constants.js";
 import { setTimeout } from "node:timers/promises";
 import FormData from "form-data";
 
+export type UtilityType = "classification" | "crop" | "split" | "ocr";
+const utilityTypes: Set<string> = new Set(["classification", "crop", "split", "ocr"]);
+const modelSelectionSeparator = "::";
+
+/**
+ * Parse a model selection value coming from the dynamic dropdown.
+ * Supports legacy values where only model ID is present.
+ */
+export function parseModelSelection(selection: string): { modelId: string, utilityType?: UtilityType } {
+  const [modelId = "", rawProduct = ""] = selection.split(modelSelectionSeparator);
+  const product = (rawProduct || "").toLowerCase();
+
+  if (utilityTypes.has(product)) {
+    return { modelId, utilityType: product as UtilityType };
+  }
+
+  return { modelId };
+}
+
+/**
+ * Build a dynamic dropdown value that preserves model ID and utility kind.
+ */
+export function buildModelSelectionValue(modelId: string, utilityType?: UtilityType): string {
+  return utilityType ? `${modelId}${modelSelectionSeparator}${utilityType}` : modelId;
+}
+
 /**
  * Get the status of an inference that was previously enqueued.
  * @param z Zapier SDK.
@@ -60,6 +86,7 @@ export async function reqUtilityPost(
  * @param name The name of the model to search for.
  * @param page The page number to retrieve.
  * @param perPage The number of models per page.
+ * @param modelType Type of model.
  * @returns A promise that resolves to the response from the server.
  */
 export async function reqSearchModelsGet(
@@ -67,12 +94,27 @@ export async function reqSearchModelsGet(
   name: string,
   page: number,
   perPage: number,
+  modelType?: string,
 ): Promise<HttpResponse> {
+  const requestParams = {
+    name,
+    page,
+    perPage,
+    modelType,
+  };
+  const apiParams: Record<string, string | number> = {
+    name: requestParams.name,
+    page: requestParams.page,
+  };
+  apiParams["per_page"] = requestParams.perPage;
+  if (requestParams.modelType) {
+    apiParams["model_type"] = requestParams.modelType;
+  }
+
   return await z.request({
     method: "GET",
     url: `${MINDEE_V2_BASE_URL}/v2/search/models`,
-    // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
-    params: { name: name, page: page, per_page: perPage },
+    params: apiParams,
   });
 }
 
@@ -84,7 +126,8 @@ export async function reqSearchModelsGet(
 function setupBaseParamsForm(bundle: Bundle): FormData {
   const form = new FormData();
 
-  form.append("model_id", bundle.inputData.modelId);
+  const selectedModel = parseModelSelection(bundle.inputData.modelId as string);
+  form.append("model_id", selectedModel.modelId);
 
   const fileData: any = bundle.inputData.file;
 
