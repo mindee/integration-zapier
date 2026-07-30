@@ -12,7 +12,7 @@ const modelId = process.env["MINDEE_V2_FINDOC_MODEL_ID"];
 
 async function assertExtractionInferenceResponse(bundle: Bundle) {
   // @ts-expect-error TBD
-  const response: any = await appTester(App.creates["v2_extraction_file_enqueue_and_poll"].operation.perform, bundle);
+  const response: any = await appTester(App.creates["v2_file_enqueue_and_poll"].operation.perform, bundle);
   expect(response).toBeInstanceOf(Object);
   expect(response.inference).toBeInstanceOf(Object);
   expect(response.inference.model.id).toEqual(modelId);
