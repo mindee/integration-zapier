@@ -1,6 +1,6 @@
 {
   "name": "mindee-ocr",
-  "version": "4.0.5",
+  "version": "4.1.0",
   "description": "Parse your document using the Mindee API.",
   "scripts": {
     "clean": "rimraf ./dist ./build",
