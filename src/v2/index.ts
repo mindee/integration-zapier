@@ -5,11 +5,10 @@ import searchSplitModels from "./triggers/searchSplitModels.js";
 import searchClassificationModels from "./triggers/searchClassificationModels.js";
 import searchOcrModels from "./triggers/searchOcrModels.js";
 import createExtractionEnqueueAndGetInference from "./creates/v2_file_enqueue_and_poll.js";
-import createUtilityEnqueueAndGetInference from "./creates/v2_utility_enqueue_and_poll.js";
-import createUtilityCropEnqueueAndGetInference from "./creates/v2_utility_crop_enqueue_and_poll.js";
-import createUtilitySplitEnqueueAndGetInference from "./creates/v2_utility_split_enqueue_and_poll.js";
-import createUtilityClassificationEnqueueAndGetInference from "./creates/v2_utility_classification_enqueue_and_poll.js";
-import createUtilityOcrEnqueueAndGetInference from "./creates/v2_utility_ocr_enqueue_and_poll.js";
+import createCropEnqueueAndGetInference from "./creates/v2_crop_enqueue_and_poll.js";
+import createSplitEnqueueAndGetInference from "./creates/v2_split_enqueue_and_poll.js";
+import createClassificationEnqueueAndGetInference from "./creates/v2_classification_enqueue_and_poll.js";
+import createOcrEnqueueAndGetInference from "./creates/v2_ocr_enqueue_and_poll.js";
 
 export {
   searchModels,
@@ -19,9 +18,8 @@ export {
   searchClassificationModels,
   searchOcrModels,
   createExtractionEnqueueAndGetInference,
-  createUtilityCropEnqueueAndGetInference,
-  createUtilitySplitEnqueueAndGetInference,
-  createUtilityClassificationEnqueueAndGetInference,
-  createUtilityOcrEnqueueAndGetInference,
-  createUtilityEnqueueAndGetInference,
+  createCropEnqueueAndGetInference,
+  createSplitEnqueueAndGetInference,
+  createClassificationEnqueueAndGetInference,
+  createOcrEnqueueAndGetInference,
 };

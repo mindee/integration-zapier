@@ -15,11 +15,10 @@ export default defineApp({
   afterResponse: [...afters],
   creates: {
     [v2.createExtractionEnqueueAndGetInference.key]: v2.createExtractionEnqueueAndGetInference,
-    [v2.createUtilityCropEnqueueAndGetInference.key]: v2.createUtilityCropEnqueueAndGetInference,
-    [v2.createUtilitySplitEnqueueAndGetInference.key]: v2.createUtilitySplitEnqueueAndGetInference,
-    [v2.createUtilityClassificationEnqueueAndGetInference.key]: v2.createUtilityClassificationEnqueueAndGetInference,
-    [v2.createUtilityOcrEnqueueAndGetInference.key]: v2.createUtilityOcrEnqueueAndGetInference,
-    [v2.createUtilityEnqueueAndGetInference.key]: v2.createUtilityEnqueueAndGetInference,
+    [v2.createCropEnqueueAndGetInference.key]: v2.createCropEnqueueAndGetInference,
+    [v2.createSplitEnqueueAndGetInference.key]: v2.createSplitEnqueueAndGetInference,
+    [v2.createClassificationEnqueueAndGetInference.key]: v2.createClassificationEnqueueAndGetInference,
+    [v2.createOcrEnqueueAndGetInference.key]: v2.createOcrEnqueueAndGetInference,
   },
   triggers: {
     [v2.searchModels.key]: v2.searchModels,

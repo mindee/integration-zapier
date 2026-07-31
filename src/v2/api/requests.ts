@@ -3,7 +3,7 @@ import { MINDEE_V2_BASE_URL } from "../../constants.js";
 import { setTimeout } from "node:timers/promises";
 import FormData from "form-data";
 
-export type UtilityType = "classification" | "crop" | "split" | "ocr";
+export type ModelType = "classification" | "crop" | "split" | "ocr";
 const utilityTypes: Set<string> = new Set(["classification", "crop", "split", "ocr"]);
 const modelSelectionSeparator = "::";
 
@@ -11,12 +11,12 @@ const modelSelectionSeparator = "::";
  * Parse a model selection value coming from the dynamic dropdown.
  * Supports legacy values where only model ID is present.
  */
-export function parseModelSelection(selection: string): { modelId: string, utilityType?: UtilityType } {
+export function parseModelSelection(selection: string): { modelId: string, utilityType?: ModelType } {
   const [modelId = "", rawProduct = ""] = selection.split(modelSelectionSeparator);
   const product = (rawProduct || "").toLowerCase();
 
   if (utilityTypes.has(product)) {
-    return { modelId, utilityType: product as UtilityType };
+    return { modelId, utilityType: product as ModelType };
   }
 
   return { modelId };
@@ -37,39 +37,36 @@ export async function reqJobGet(
 }
 
 /**
- * Send a file to the asynchronous processing queue for an inference.
- * @param z Zapier SDK.
- * @param bundle The body of the request.
- * @returns A promise that resolves to the response from the server.
- */
-export async function reqExtractionPost(
-  z: ZObject,
-  bundle: any,
-): Promise<HttpResponse> {
-  return await z.request({
-    method: "POST",
-    url: `${MINDEE_V2_BASE_URL}/v2/products/extraction/enqueue`,
-    body: setupExtractionParamsForm(bundle),
-  });
-}
-
-
-/**
  * Send a file to the asynchronous processing queue for an utility inference.
  * @param z Zapier SDK.
  * @param utilityName The name of the utility to use.
  * @param bundle The body of the request.
  * @returns A promise that resolves to the response from the server.
  */
-export async function reqUtilityPost(
+export async function reqPost(
   z: ZObject,
   utilityName: string,
   bundle: any,
 ): Promise<HttpResponse> {
+  const selectedModel = parseModelSelection(bundle.inputData.modelId as string);
+  const utilityTypeFromInput = typeof bundle.inputData.utilityType === "string"
+    ? bundle.inputData.utilityType.toLowerCase()
+    : undefined;
+  const inferredUtilityType = utilityTypeFromInput || selectedModel.utilityType;
+  const productName = utilityName === "extraction" && inferredUtilityType
+    ? inferredUtilityType
+    : utilityName;
+
+  let body;
+  if (productName === "extraction") {
+    body = setupExtractionParamsForm(bundle);
+  } else {
+    body = setupUtilityParamsForm(bundle);
+  }
   return await z.request({
     method: "POST",
-    url: `${MINDEE_V2_BASE_URL}/v2/products/${utilityName}/enqueue`,
-    body: setupUtilityParamsForm(bundle),
+    url: `${MINDEE_V2_BASE_URL}/v2/products/${productName}/enqueue`,
+    body: body,
   });
 }
 
@@ -89,19 +86,17 @@ export async function reqSearchModelsGet(
   perPage: number,
   modelType?: string,
 ): Promise<HttpResponse> {
-  const requestParams = {
-    name,
-    page,
-    perPage,
-    modelType,
-  };
   const apiParams: Record<string, string | number> = {
-    name: requestParams.name,
-    page: requestParams.page,
+    page,
   };
-  apiParams["per_page"] = requestParams.perPage;
-  if (requestParams.modelType) {
-    apiParams["model_type"] = requestParams.modelType;
+  apiParams["per_page"] = perPage;
+
+  if (name && name.trim().length > 0) {
+    apiParams["name"] = name;
+  }
+
+  if (modelType) {
+    apiParams["model_type"] = modelType;
   }
 
   return await z.request({

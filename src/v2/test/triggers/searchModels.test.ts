@@ -16,10 +16,10 @@ const bundle = {
 };
 
 describe("triggers.search_models", () => {
-  it("should return at least one exact utility model for each utility type", async () => {
-    const utilities = ["crop", "split", "ocr", "classification"];
+  it("should return at least one exact non-extraction model for each type", async () => {
+    const modelType = ["crop", "split", "ocr", "classification"];
 
-    for (const utility of utilities) {
+    for (const utility of modelType) {
       bundle.meta.withSearch = utility;
       bundle.meta.page = 0;
       // @ts-expect-error TBD

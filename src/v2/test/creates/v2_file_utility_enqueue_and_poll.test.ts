@@ -23,7 +23,7 @@ const cropExtractionModelId = requireEnv("MINDEE_V2_CROP_EXTRACTION_MODEL_ID");
 
 async function assertUtilityInferenceResponse(bundle: Bundle, productModelId: string) {
   // @ts-expect-error TBD
-  const response: any = await appTester(App.creates["v2_utility_file_enqueue_and_poll"].operation.perform, bundle);
+  const response: any = await appTester(App.creates["v2_file_enqueue_and_poll"].operation.perform, bundle);
 
   expect(response).toBeInstanceOf(Object);
   expect(response.inference).toBeInstanceOf(Object);
@@ -83,7 +83,7 @@ describe("utility", () => {
       };
 
       // @ts-expect-error TBD
-      const response: any = await appTester(App.creates["v2_utility_file_enqueue_and_poll"].operation.perform, bundle);
+      const response: any = await appTester(App.creates["v2_file_enqueue_and_poll"].operation.perform, bundle);
 
       expect(response).toBeInstanceOf(Object);
       expect(response.inference.result).toBeInstanceOf(Object);

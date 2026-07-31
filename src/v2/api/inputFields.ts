@@ -10,13 +10,11 @@ const optionChoices: FieldChoices = [
 
 const modelSearchTriggers = {
   extraction: "v2_search_extraction_models",
-  utilities: {
-    base: "v2_search_models",
-    crop: "v2_search_crop_models",
-    split: "v2_search_split_models",
-    ocr: "v2_search_ocr_models",
-    classification: "v2_search_classification_models",
-  },
+  base: "v2_search_models",
+  crop: "v2_search_crop_models",
+  split: "v2_search_split_models",
+  ocr: "v2_search_ocr_models",
+  classification: "v2_search_classification_models",
 } as const;
 
 function createBaseFields<const T extends string>(searchTriggerKey: T) {
@@ -41,30 +39,25 @@ function createBaseFields<const T extends string>(searchTriggerKey: T) {
 
 const extractionBaseFields = createBaseFields(modelSearchTriggers.extraction);
 
-const utilitiesBaseFields = createBaseFields(modelSearchTriggers.utilities.base);
-const utilityCropBaseFields = createBaseFields(modelSearchTriggers.utilities.crop);
-const utilitySplitBaseFields = createBaseFields(modelSearchTriggers.utilities.split);
-const utilityOcrBaseFields = createBaseFields(modelSearchTriggers.utilities.ocr);
-const utilityClassificationBaseFields = createBaseFields(modelSearchTriggers.utilities.classification);
+const cropBaseFields = createBaseFields(modelSearchTriggers.crop);
+const splitBaseFields = createBaseFields(modelSearchTriggers.split);
+const ocrBaseFields = createBaseFields(modelSearchTriggers.ocr);
+const classificationBaseFields = createBaseFields(modelSearchTriggers.classification);
 
-export const utilityCreateFields = defineInputFields([
-  ...utilitiesBaseFields,
+export const cropCreateFields = defineInputFields([
+  ...cropBaseFields,
 ]);
 
-export const utilityCropCreateFields = defineInputFields([
-  ...utilityCropBaseFields,
+export const splitCreateFields = defineInputFields([
+  ...splitBaseFields,
 ]);
 
-export const utilitySplitCreateFields = defineInputFields([
-  ...utilitySplitBaseFields,
+export const classificationCreateFields = defineInputFields([
+  ...classificationBaseFields,
 ]);
 
-export const utilityClassificationCreateFields = defineInputFields([
-  ...utilityClassificationBaseFields,
-]);
-
-export const utilityOcrCreateFields = defineInputFields([
-  ...utilityOcrBaseFields,
+export const ocrCreateFields = defineInputFields([
+  ...ocrBaseFields,
 ]);
 
 export const inferenceCreateFields = defineInputFields([
