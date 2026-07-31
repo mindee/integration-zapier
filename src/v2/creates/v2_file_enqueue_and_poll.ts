@@ -39,7 +39,7 @@ export default defineCreate({
   display: {
     label: "⭐ Document Data Extraction",
     description: "Extract data from a document file and return the result." +
-      " Use any extraction model you've built on Mindee.h",
+      " Use any extraction model you've built on the Mindee platform.",
     hidden: false,
   },
   operation: {

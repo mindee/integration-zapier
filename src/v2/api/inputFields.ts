@@ -32,7 +32,7 @@ function createBaseFields<const T extends string>(searchTriggerKey: T) {
       label: "File to Send",
       required: true,
       type: "file" as const,
-      helpText: "The file to analyze.",
+      helpText: "The file to process.",
     },
   ] as const;
 }
