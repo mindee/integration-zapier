@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.1.0 - 2026-08-06
+- Add support for crop, split, ocr and classification products
+
+
 ## v4.0.4 - 2025-12-16
 - Update Zapier platform to 18.0.5
 - Update vitest to 3.2

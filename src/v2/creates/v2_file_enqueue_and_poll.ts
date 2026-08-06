@@ -37,7 +37,7 @@ export default defineCreate({
   key: "v2_file_enqueue_and_poll",
   noun: "Data Extraction Request",
   display: {
-    label: "⭐ Document Data Extraction",
+    label: "✨ Document Data Extraction",
     description: "Extract data from a document file and return the result." +
       " Use any extraction model you've built on the Mindee platform.",
     hidden: false,

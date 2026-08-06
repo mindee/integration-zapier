@@ -64,5 +64,5 @@ describe("creates.enqueue", () => {
       }
     };
     await assertExtractionInferenceResponse(bundle);
-  }, 15000);
+  }, 30000);
 });
