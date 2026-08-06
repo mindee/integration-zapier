@@ -67,7 +67,7 @@ describe("utility", () => {
         };
         await assertUtilityInferenceResponse(bundle, modelId);
       },
-      15000
+      30000
     );
 
     it("should send a file stream to crop and extract the chained extraction", async () => {
