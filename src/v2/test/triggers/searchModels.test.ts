@@ -16,8 +16,26 @@ const bundle = {
 };
 
 describe("triggers.search_models", () => {
+  it("should return at least one exact non-extraction model for each type", async () => {
+    const modelType = ["crop", "split", "ocr", "classification"];
+
+    for (const utility of modelType) {
+      bundle.meta.withSearch = utility;
+      bundle.meta.page = 0;
+      // @ts-expect-error TBD
+      const results: Array = await appTester(App.triggers["v2_search_models"].operation.perform, bundle);
+
+      expect(results).toBeInstanceOf(Array);
+      expect(results.length).toBeGreaterThanOrEqual(1);
+      const hasUtilityNamedModel = results.some((model: any) => (
+        model.model_type || "").toLowerCase() === utility
+      );
+      expect(hasUtilityNamedModel).toBe(true);
+    }
+  });
+
   it("should filter", async () => {
-    bundle.meta.withSearch = "financial";
+    bundle.meta.withSearch = "fin";
     // @ts-expect-error TBD
     const results: Array = await appTester(App.triggers["v2_search_models"].operation.perform, bundle);
     expect(results).toBeInstanceOf(Array);

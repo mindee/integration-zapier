@@ -1,32 +1,67 @@
-import {
-  type FieldChoices,
-  defineInputFields,
-} from "zapier-platform-core";
+import { defineInputFields, type FieldChoices } from "zapier-platform-core";
 
 const optionDefault = "default";
 
 const optionChoices: FieldChoices = [
   { label: "Use Model Default", value: optionDefault, sample: "default" },
-  { label: "Enabled", value: "true", sample:"true" },
-  { label: "Disabled", value: "false", sample:"false" },
+  { label: "Enabled", value: "true", sample: "true" },
+  { label: "Disabled", value: "false", sample: "false" },
 ];
 
+const modelSearchTriggers = {
+  extraction: "v2_search_extraction_models",
+  base: "v2_search_models",
+  crop: "v2_search_crop_models",
+  split: "v2_search_split_models",
+  ocr: "v2_search_ocr_models",
+  classification: "v2_search_classification_models",
+} as const;
+
+function createBaseFields<const T extends string>(searchTriggerKey: T) {
+  return [
+    {
+      key: "modelId",
+      label: "Model to Use",
+      required: true,
+      type: "string" as const,
+      dynamic: `${searchTriggerKey}.id.name` as const,
+      helpText: "The model to use.",
+    },
+    {
+      key: "file",
+      label: "File to Send",
+      required: true,
+      type: "file" as const,
+      helpText: "The file to process.",
+    },
+  ] as const;
+}
+
+const extractionBaseFields = createBaseFields(modelSearchTriggers.extraction);
+
+const cropBaseFields = createBaseFields(modelSearchTriggers.crop);
+const splitBaseFields = createBaseFields(modelSearchTriggers.split);
+const ocrBaseFields = createBaseFields(modelSearchTriggers.ocr);
+const classificationBaseFields = createBaseFields(modelSearchTriggers.classification);
+
+export const cropCreateFields = defineInputFields([
+  ...cropBaseFields,
+]);
+
+export const splitCreateFields = defineInputFields([
+  ...splitBaseFields,
+]);
+
+export const classificationCreateFields = defineInputFields([
+  ...classificationBaseFields,
+]);
+
+export const ocrCreateFields = defineInputFields([
+  ...ocrBaseFields,
+]);
+
 export const inferenceCreateFields = defineInputFields([
-  {
-    key: "modelId",
-    label: "Model to Use",
-    required: true,
-    type: "string",
-    dynamic: "v2_search_models.id.name",
-    helpText: "The model to use.",
-  },
-  {
-    key: "file",
-    label: "File to Send",
-    required: true,
-    type: "file",
-    helpText: "The file to analyze.",
-  },
+  ...extractionBaseFields,
   {
     key: "rawText",
     label: "Enable Raw Text (Full OCR)",

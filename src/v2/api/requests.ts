@@ -3,6 +3,25 @@ import { MINDEE_V2_BASE_URL } from "../../constants.js";
 import { setTimeout } from "node:timers/promises";
 import FormData from "form-data";
 
+export type ModelType = "classification" | "crop" | "split" | "ocr";
+const utilityTypes: Set<string> = new Set(["classification", "crop", "split", "ocr"]);
+const modelSelectionSeparator = "::";
+
+/**
+ * Parse a model selection value coming from the dynamic dropdown.
+ * Supports legacy values where only model ID is present.
+ */
+export function parseModelSelection(selection: string): { modelId: string, utilityType?: ModelType } {
+  const [modelId = "", rawProduct = ""] = selection.split(modelSelectionSeparator);
+  const product = (rawProduct || "").toLowerCase();
+
+  if (utilityTypes.has(product)) {
+    return { modelId, utilityType: product as ModelType };
+  }
+
+  return { modelId };
+}
+
 /**
  * Get the status of an inference that was previously enqueued.
  * @param z Zapier SDK.
@@ -18,19 +37,36 @@ export async function reqJobGet(
 }
 
 /**
- * Send a file to the asynchronous processing queue for an inference.
+ * Send a file to the asynchronous processing queue for an utility inference.
  * @param z Zapier SDK.
+ * @param utilityName The name of the utility to use.
  * @param bundle The body of the request.
  * @returns A promise that resolves to the response from the server.
  */
-export async function reqExtractionPost(
+export async function reqPost(
   z: ZObject,
+  utilityName: string,
   bundle: any,
 ): Promise<HttpResponse> {
+  const selectedModel = parseModelSelection(bundle.inputData.modelId as string);
+  const utilityTypeFromInput = typeof bundle.inputData.utilityType === "string"
+    ? bundle.inputData.utilityType.toLowerCase()
+    : undefined;
+  const inferredUtilityType = utilityTypeFromInput || selectedModel.utilityType;
+  const productName = utilityName === "extraction" && inferredUtilityType
+    ? inferredUtilityType
+    : utilityName;
+
+  let body;
+  if (productName === "extraction") {
+    body = setupExtractionParamsForm(bundle);
+  } else {
+    body = setupUtilityParamsForm(bundle);
+  }
   return await z.request({
     method: "POST",
-    url: `${MINDEE_V2_BASE_URL}/v2/products/extraction/enqueue`,
-    body: setupExtractionParamsForm(bundle),
+    url: `${MINDEE_V2_BASE_URL}/v2/products/${productName}/enqueue`,
+    body: body,
   });
 }
 
@@ -40,6 +76,7 @@ export async function reqExtractionPost(
  * @param name The name of the model to search for.
  * @param page The page number to retrieve.
  * @param perPage The number of models per page.
+ * @param modelType Type of model.
  * @returns A promise that resolves to the response from the server.
  */
 export async function reqSearchModelsGet(
@@ -47,13 +84,63 @@ export async function reqSearchModelsGet(
   name: string,
   page: number,
   perPage: number,
+  modelType?: string,
 ): Promise<HttpResponse> {
+  const apiParams: Record<string, string | number> = {
+    page,
+  };
+  apiParams["per_page"] = perPage;
+
+  if (name && name.trim().length > 0) {
+    apiParams["name"] = name;
+  }
+
+  if (modelType) {
+    apiParams["model_type"] = modelType;
+  }
+
   return await z.request({
     method: "GET",
     url: `${MINDEE_V2_BASE_URL}/v2/search/models`,
-    // eslint-disable-next-line @typescript-eslint/naming-convention,camelcase
-    params: { name: name, page: page, per_page: perPage },
+    params: apiParams,
   });
+}
+
+/**
+ * Sets up the base form data with common fields (model_id and file).
+ * @param bundle Zapier bundle
+ * @returns A populated FormData instance.
+ */
+function setupBaseParamsForm(bundle: Bundle): FormData {
+  const form = new FormData();
+
+  const selectedModel = parseModelSelection(bundle.inputData.modelId as string);
+  form.append("model_id", selectedModel.modelId);
+
+  const fileData: any = bundle.inputData.file;
+
+  if (!fileData) {
+    throw new Error("No file provided");
+  }
+
+  if (typeof fileData === "object" && fileData.url) {
+    form.append("url", fileData.url);
+  } else if (typeof fileData === "string") {
+    form.append(fileData.startsWith("http") ? "url" : "file_base64", fileData);
+  } else {
+    form.append("file", fileData);
+  }
+
+  return form;
+}
+
+/**
+ * Sets up the body for the enqueue & enqueueAndGetInference operation for utilities.
+ * @param bundle Zapier bundle
+ * @returns The body for the enqueue & enqueueAndGetInference operation.
+ */
+export function setupUtilityParamsForm(bundle: Bundle): FormData {
+  return setupBaseParamsForm(bundle);
 }
 
 /**
@@ -62,40 +149,23 @@ export async function reqSearchModelsGet(
  * @returns The body for the enqueue & enqueueAndGetInference operation.
  */
 export function setupExtractionParamsForm(bundle: Bundle): FormData {
-  const form = new FormData();
+  const form = setupBaseParamsForm(bundle);
+  const { confidence, polygon, rag, rawText } = bundle.inputData;
 
-  form.append("model_id", bundle.inputData.modelId);
+  const optionalFields = [
+    { key: "confidence", value: confidence },
+    { key: "polygon", value: polygon },
+    { key: "rag", value: rag },
+    { key: "raw_text", value: rawText },
+  ];
 
-  const fileData: any = bundle.inputData.file;
-
-  // zapier can send the data in various ways
-  if (!fileData) {
-    throw new Error("No file provided");
-  }
-  if (typeof fileData === "object" && fileData.url) {
-    form.append("url", fileData.url);
-  } else if (typeof fileData === "string") {
-    if (fileData.startsWith("http")) {
-      form.append("url", fileData);
-    } else {
-      form.append("file_base64", fileData);
+  // Append any optional fields that are provided and not set to "default"
+  for (const { key, value } of optionalFields) {
+    if (value && value !== "default") {
+      form.append(key, value);
     }
-  } else {
-    form.append("file", fileData);
   }
 
-  if (bundle.inputData["confidence"] && bundle.inputData["confidence"] !== "default") {
-    form.append("confidence", bundle.inputData.confidence);
-  }
-  if (bundle.inputData.polygon && bundle.inputData.polygon !== "default") {
-    form.append("polygon", bundle.inputData.polygon);
-  }
-  if (bundle.inputData.rag && bundle.inputData.rag !== "default") {
-    form.append("rag", bundle.inputData.rag);
-  }
-  if (bundle.inputData.rawText && bundle.inputData.rawText !== "default") {
-    form.append("raw_text", bundle.inputData.rawText);
-  }
   return form;
 }
 

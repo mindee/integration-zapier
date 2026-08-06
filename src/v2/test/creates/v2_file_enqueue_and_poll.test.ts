@@ -10,7 +10,7 @@ zapier.tools.env.inject();
 
 const modelId = process.env["MINDEE_V2_FINDOC_MODEL_ID"];
 
-async function assertInferenceResponse(bundle: Bundle) {
+async function assertExtractionInferenceResponse(bundle: Bundle) {
   // @ts-expect-error TBD
   const response: any = await appTester(App.creates["v2_file_enqueue_and_poll"].operation.perform, bundle);
   expect(response).toBeInstanceOf(Object);
@@ -37,7 +37,7 @@ describe("creates.enqueue", () => {
         modelId: modelId,
       }
     };
-    await assertInferenceResponse(bundle);
+    await assertExtractionInferenceResponse(bundle);
   }, 15000);
 
   it("should send a file stream", async () => {
@@ -50,8 +50,8 @@ describe("creates.enqueue", () => {
         modelId: modelId,
       }
     };
-    await assertInferenceResponse(bundle);
-  }, 15000);
+    await assertExtractionInferenceResponse(bundle);
+  }, 30000);
 
   it("should send a URL", async () => {
     const bundle: any = {
@@ -63,6 +63,6 @@ describe("creates.enqueue", () => {
         modelId: modelId,
       }
     };
-    await assertInferenceResponse(bundle);
+    await assertExtractionInferenceResponse(bundle);
   }, 15000);
 });

@@ -4,7 +4,7 @@ import {
   type CreatePerform,
   type InferInputData,
 } from "zapier-platform-core";
-import { reqExtractionPost, pollForInference } from "../api/requests.js";
+import { reqPost, pollForInference } from "../api/requests.js";
 import completeInference from "../api/samples/inferenceComplete.json" with { type: "json" };
 import { inferenceCreateFields, pollingFields } from "../api/inputFields.js";
 import { inferenceOutputFields } from "../api/outputFields.js";
@@ -18,13 +18,14 @@ const inputFields = defineInputFields(
 );
 
 /**
- * Performs the enqueueAndGetInference operation.
+ * Performs the enqueueAndGetInference operation on an extraction model.
  * @param z Zapier SDK
  * @param bundle Zapier bundle
  * @returns A promise that resolves to the enqueueAndGetInference results, containing the result.
  */
 const perform = (async (z, bundle) => {
-  const jobId = await reqExtractionPost(z, bundle)
+
+  const jobId = await reqPost(z, "extraction", bundle)
     .then(response => response.data.job.id);
   const response = await pollForInference(z, jobId, bundle.inputData.maxPollingTimeOut);
   return response.data;
@@ -36,9 +37,9 @@ export default defineCreate({
   key: "v2_file_enqueue_and_poll",
   noun: "Data Extraction Request",
   display: {
-    label: "Document Data Extraction",
+    label: "⭐ Document Data Extraction",
     description: "Extract data from a document file and return the result." +
-      " Use any extraction model you've built on Mindee.",
+      " Use any extraction model you've built on the Mindee platform.",
     hidden: false,
   },
   operation: {
